@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tomek\\Desktop\\C#\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj": {}
+    "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tomek\\Desktop\\C#\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj": {
+    "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tomek\\Desktop\\C#\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
+        "projectUniqueName": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
         "projectName": "CustomCalendar",
-        "projectPath": "C:\\Users\\Tomek\\Desktop\\C#\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
+        "projectPath": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
         "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tomek\\Desktop\\C#\\CustomCalendar\\CustomCalendar\\obj\\",
+        "outputPath": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
