@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MessageWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label x:Name="TextLabel" Content="Label" HorizontalAlignment="Left" Margin="170,121,0,0" VerticalAlignment="Top" Height="57" Width="352" FontSize="22"/>
+        <Button x:Name="ConfirmButton" Content="Button" HorizontalAlignment="Left" Margin="237,249,0,0" VerticalAlignment="Top" Height="84" Width="218" FontSize="22"/>
+
     </Grid>
 </Window>

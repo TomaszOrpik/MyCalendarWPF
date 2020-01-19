@@ -1,12 +1,108 @@
 ﻿<Window x:Class="MyCalendar_WPF_App.MainWindow"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCalendar_WPF_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="1856" Width="2312">
+    <Grid Margin="65,0,-68,0" RenderTransformOrigin="0.417,0.533" Height="1836">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleX="-1"/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform X="335.818"/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="214,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.692"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="226,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.692"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="202,689,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.692"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="210,929,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.692"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
+        <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
+        <ComboBox x:Name="MonthCombobox" HorizontalAlignment="Left" Margin="1541,220,0,0" VerticalAlignment="Top" Width="331" Height="76"/>
+        <TextBox x:Name="YearTextbox" HorizontalAlignment="Left" Margin="1009,236,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="501" Height="60"/>
+        <Button x:Name="ButtonCalendar1" Content="Button" HorizontalAlignment="Left" Margin="1900,506,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar3" Content="Button" HorizontalAlignment="Left" Margin="1498,506,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar2" Content="Button" HorizontalAlignment="Left" Margin="1706,501,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar4" Content="Button" HorizontalAlignment="Left" Margin="1260,506,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar5" Content="Button" HorizontalAlignment="Left" Margin="1030,501,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar6" Content="Button" HorizontalAlignment="Left" Margin="779,501,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar7" Content="Button" HorizontalAlignment="Left" Margin="557,501,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar8" Content="Button" HorizontalAlignment="Left" Margin="1900,660,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar10" Content="Button" HorizontalAlignment="Left" Margin="1498,660,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar9" Content="Button" HorizontalAlignment="Left" Margin="1706,660,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar11" Content="Button" HorizontalAlignment="Left" Margin="1260,660,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar12" Content="Button" HorizontalAlignment="Left" Margin="1030,655,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar13" Content="Button" HorizontalAlignment="Left" Margin="779,655,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar14" Content="Button" HorizontalAlignment="Left" Margin="557,655,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar15" Content="Button" HorizontalAlignment="Left" Margin="1900,812,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar17" Content="Button" HorizontalAlignment="Left" Margin="1498,812,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar16" Content="Button" HorizontalAlignment="Left" Margin="1712,807,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar18" Content="Button" HorizontalAlignment="Left" Margin="1260,812,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar19" Content="Button" HorizontalAlignment="Left" Margin="1030,807,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar20" Content="Button" HorizontalAlignment="Left" Margin="779,807,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar21" Content="Button" HorizontalAlignment="Left" Margin="557,807,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar22" Content="Button" HorizontalAlignment="Left" Margin="1900,957,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar24" Content="Button" HorizontalAlignment="Left" Margin="1498,957,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar23" Content="Button" HorizontalAlignment="Left" Margin="1712,957,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar25" Content="Button" HorizontalAlignment="Left" Margin="1260,957,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar26" Content="Button" HorizontalAlignment="Left" Margin="1030,952,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar27" Content="Button" HorizontalAlignment="Left" Margin="779,952,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar28" Content="Button" HorizontalAlignment="Left" Margin="557,952,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar29" Content="Button" HorizontalAlignment="Left" Margin="1900,1097,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar31" Content="Button" HorizontalAlignment="Left" Margin="1498,1097,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar30" Content="Button" HorizontalAlignment="Left" Margin="1712,1097,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar32" Content="Button" HorizontalAlignment="Left" Margin="1260,1097,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar33" Content="Button" HorizontalAlignment="Left" Margin="1030,1092,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar34" Content="Button" HorizontalAlignment="Left" Margin="779,1092,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar35" Content="Button" HorizontalAlignment="Left" Margin="557,1092,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar36" Content="Button" HorizontalAlignment="Left" Margin="1900,1258,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar38" Content="Button" HorizontalAlignment="Left" Margin="1498,1258,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar37" Content="Button" HorizontalAlignment="Left" Margin="1712,1258,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar39" Content="Button" HorizontalAlignment="Left" Margin="1260,1258,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar40" Content="Button" HorizontalAlignment="Left" Margin="1030,1253,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar41" Content="Button" HorizontalAlignment="Left" Margin="779,1253,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Button x:Name="ButtonCalendar42" Content="Button" HorizontalAlignment="Left" Margin="557,1253,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
+        <Label x:Name="TimeLabel" Content="Label" HorizontalAlignment="Left" Margin="1185,1447,0,0" VerticalAlignment="Top" Height="117" Width="414"/>
 
     </Grid>
 </Window>
