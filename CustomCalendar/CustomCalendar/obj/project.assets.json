@@ -551,6 +551,36 @@
           "ref/netstandard1.3/System.Console.dll": {}
         }
       },
+      "System.Data.Odbc/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Data.Odbc.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Data.Odbc.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/freebsd/lib/netcoreapp2.0/System.Data.Odbc.dll": {
+            "assetType": "runtime",
+            "rid": "freebsd"
+          },
+          "runtimes/linux/lib/netcoreapp2.0/System.Data.Odbc.dll": {
+            "assetType": "runtime",
+            "rid": "linux"
+          },
+          "runtimes/osx/lib/netcoreapp2.0/System.Data.Odbc.dll": {
+            "assetType": "runtime",
+            "rid": "osx"
+          },
+          "runtimes/win/lib/netcoreapp2.0/System.Data.Odbc.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Data.SQLite.Core/1.0.112": {
         "type": "package",
         "compile": {
@@ -2654,6 +2684,41 @@
         "ref/xamarinwatchos10/_._",
         "system.console.4.3.0.nupkg.sha512",
         "system.console.nuspec"
+      ]
+    },
+    "System.Data.Odbc/4.7.0": {
+      "sha512": "unlxM2E513eogjihvQ4cGuI+wa5QGH/C4u5Rf34A8alDArtmNwvY1FrnoHaLDdR/pOIlj+mxxpOfI1zTuQ4erA==",
+      "type": "package",
+      "path": "system.data.odbc/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Data.Odbc.dll",
+        "lib/net461/System.Data.Odbc.xml",
+        "lib/netstandard2.0/System.Data.Odbc.dll",
+        "lib/netstandard2.0/System.Data.Odbc.xml",
+        "ref/net461/System.Data.Odbc.dll",
+        "ref/net461/System.Data.Odbc.xml",
+        "ref/net472/System.Data.Odbc.dll",
+        "ref/net472/System.Data.Odbc.xml",
+        "ref/netstandard2.0/System.Data.Odbc.dll",
+        "ref/netstandard2.0/System.Data.Odbc.xml",
+        "runtimes/freebsd/lib/netcoreapp2.0/System.Data.Odbc.dll",
+        "runtimes/freebsd/lib/netcoreapp2.0/System.Data.Odbc.xml",
+        "runtimes/linux/lib/netcoreapp2.0/System.Data.Odbc.dll",
+        "runtimes/linux/lib/netcoreapp2.0/System.Data.Odbc.xml",
+        "runtimes/osx/lib/netcoreapp2.0/System.Data.Odbc.dll",
+        "runtimes/osx/lib/netcoreapp2.0/System.Data.Odbc.xml",
+        "runtimes/win/lib/net461/System.Data.Odbc.dll",
+        "runtimes/win/lib/net461/System.Data.Odbc.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Data.Odbc.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Data.Odbc.xml",
+        "system.data.odbc.4.7.0.nupkg.sha512",
+        "system.data.odbc.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Data.SQLite.Core/1.0.112": {
@@ -5887,6 +5952,7 @@
       "Dapper >= 2.0.30",
       "Google.Apis.Calendar.v3 >= 1.43.0.1830",
       "System.Configuration.ConfigurationManager >= 4.7.0",
+      "System.Data.Odbc >= 4.7.0",
       "System.Data.SQLite.Core >= 1.0.112"
     ]
   },
@@ -5941,6 +6007,10 @@
             "version": "[1.43.0.1830, )"
           },
           "System.Configuration.ConfigurationManager": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
+          "System.Data.Odbc": {
             "target": "Package",
             "version": "[4.7.0, )"
           },

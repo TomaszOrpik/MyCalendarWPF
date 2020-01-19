@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App.config" />
     <None Remove="CalendarDB.db" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="CalendarDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

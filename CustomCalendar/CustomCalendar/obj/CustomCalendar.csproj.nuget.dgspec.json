@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "System.Data.Odbc": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "System.Data.SQLite.Core": {
               "target": "Package",
               "version": "[1.0.112, )"

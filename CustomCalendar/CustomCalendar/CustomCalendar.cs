@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Dapper;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
@@ -31,9 +28,15 @@ namespace CustomCalendar
         internal string _description;
         internal bool _reminder;
 
+        internal string _database = @"URI=file:"+Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\CalendarDB.db";
+        internal static string _sdatabase = @"URI=file:" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\CalendarDB.db";
+
+
+
         //default constructor
         public Note(string id, string name, string date, string title, string description, bool reminder)
         {
+            CreateTable();
             _id = id;
             _name = name;
             _date = date;
@@ -41,21 +44,58 @@ namespace CustomCalendar
             _description = description;
             _reminder = reminder;
         }
-        
+
         //get note directly from database
         public Note(string name)
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<string>($"SELECT * FROM Notes WHERE Name = '{name}';", new DynamicParameters());
-                List<string> values = output.ToList();
-                _id = values[0];
-                _name = values[1];
-                _date = values[2];
-                _title = values[3];
-                _description = values[4];
-                _reminder = values[5] == "1" ? true : false;
+            using var con = new SQLiteConnection(_database);
+            con.Open();
 
+            string stm = $"SELECT Id, Name, Date, Title, Description, Reminder FROM Notes WHERE Name = \"{name}\" LIMIT 1;";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                _id = rdr.GetInt32(0).ToString();
+                _name = rdr.GetString(1);
+                _date = rdr.GetString(2);
+                _title = rdr.GetString(3);
+                _description = rdr.GetString(4);
+                _reminder = rdr.GetString(5) == "1" ? true : false;
+            }
+            con.Close();
+        }
+        //check if table exists
+        internal bool CheckForTable(string tableName)
+        {
+            try
+            {
+                using var con = new SQLiteConnection(_database);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = "SELECT COUNT(*) FROM " + tableName;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        //create table if exists
+        internal void CreateTable()
+        {
+            if(CheckForTable("Notes") == false)
+            {
+                using var con = new SQLiteConnection(_database);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE Notes(Id INTEGER PRIMARY KEY, Name TEXT,
+                Date TEXT, Title TEXT, Description TEXT, Reminder TEXT);";
+                cmd.ExecuteNonQuery();
             }
         }
         
@@ -73,31 +113,37 @@ namespace CustomCalendar
         public bool GetReminder() => _reminder;
         
         //Save note object to database
-        public void Save()
+        public void Save() 
         {
             string reminder = _reminder == true ? "1" : "0";
 
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"INSERT INTO Notes (Name, Date, Title, Description, Reminder) VALUES ({_name}, {_date}, {_title}, {_description}, {reminder});");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+            
+            cmd.CommandText = "INSERT INTO Notes(Name, Date, Title, Description, Reminder) VALUES('"+_name+"', '"+_date+"', '"+_title+"', '"+_description+"', '"+reminder+"');";
+            cmd.ExecuteNonQuery();
         }
 
         //delete note from database by name
         public void Delete() 
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Notes WHERE Name = '{_name}';");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Notes WHERE Name = \"{_name}\";";
+            cmd.ExecuteNonQuery();
         }
 
         public static void StaticDelete(string name) 
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Notes WHERE Name = '{name}';");
-            }
+            using var con = new SQLiteConnection(_sdatabase);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Notes WHERE Name = \"{name}\" LIMIT 1;";
+            cmd.ExecuteNonQuery();
         }
 
         internal static string LoadConnectionString(string id="Default")
@@ -123,6 +169,7 @@ namespace CustomCalendar
         //default constructor
         public CustomMail(string id, string name, string date, string title, string description, bool reminder, string login, string password, string recipent) : base(id, name, date, title, description, reminder)
         {
+            CreateTable();
             _sended = reminder;
             _login = login;
             _password = password;
@@ -133,21 +180,40 @@ namespace CustomCalendar
         public CustomMail(string name) : base(name)
         {
             //code re-use to make sure all data is readed correctly
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<string>($"SELECT * FROM Mails WHERE Name = '{name}';", new DynamicParameters());
-                List<string> values = output.ToList();
-                _id = values[0];
-                _name = values[1];
-                _date = values[2];
-                _title = values[3];
-                _description = values[4];
-                _sended = values[5] == "1" ? true : false;
-                //load password from db with decryptor
-                _login = values[6];
-                _password = Encryptor.Decrypt(_key, values[7]);
-                _recipent = values[8];
+            using var con = new SQLiteConnection(_database);
+            con.Open();
 
+            string stm = $"SELECT Id, Name, Date, Title, Description, Sended, Login, Password, Recipent FROM Mails WHERE Name = \"{name}\" LIMIT 1;";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                _id = rdr.GetInt32(0).ToString();
+                _name = rdr.GetString(1);
+                _date = rdr.GetString(2);
+                _title = rdr.GetString(3);
+                _description = rdr.GetString(4);
+                _sended = rdr.GetString(5) == "1" ? true : false;
+                _login = rdr.GetString(6);
+                _password = Encryptor.Decrypt(_key, rdr.GetString(7));
+                _recipent = rdr.GetString(8);
+            }
+            con.Close();
+        }
+
+        //create table if no exists
+        internal new void CreateTable()
+        {
+            if (CheckForTable("Mails") == false)
+            {
+                using var con = new SQLiteConnection(_database);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE Mails(Id INTEGER PRIMARY KEY, Name TEXT,
+                Date TEXT, Title TEXT, Description TEXT, Sended TEXT, Login TEXT, Password TEXT, Recipent TEXT);";
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -169,11 +235,14 @@ namespace CustomCalendar
         {
             string sended = _sended == true ? "1" : "0";
 
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"INSERT INTO Mails (Name, Date, Title, Description, Sended, Login, Password, Recipent) VALUES " +
-                    $"({_name}, {_date}, {_title}, {_description}, {sended}, {_login}, {Encryptor.Encrypt(_key, _password)}, {_recipent});");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = "INSERT INTO Mails(Name, Date, Title, Description, Sended, Login, Password, Recipent) VALUES('" + _name + "', '" + _date + "', '" + _title 
+                + "', '" + _description + "', '" + sended + "', '"+_login+"', '"+Encryptor.Encrypt(_key, _password)+"', '"+_recipent+"');";
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public void SendMail()
@@ -204,52 +273,61 @@ namespace CustomCalendar
         //send mail directly from database
         public static void StaticSendMail(string name)
         {
-            List<string> values = new List<string>();
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<string>($"SELECT * FROM Mails WHERE Name = '{name}';", new DynamicParameters());
-                values = output.ToList();
-            }
+            using var con = new SQLiteConnection(_sdatabase);
+            con.Open();
+
+            string stm = $"SELECT Id, Name, Date, Title, Description, Sended, Login, Password, Recipent FROM Mails WHERE Name = \"{name}\" LIMIT 1;";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
 
             try
             {
-                var message = new MailMessage(values[6], values[8]);
-                message.Subject = values[3];
-                message.Body = values[4];
-
-                using (SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587))
+                if (rdr.Read())
                 {
-                    mailer.Credentials = new NetworkCredential(values[6], Encryptor.Decrypt(_skey, values[7]));
-                    mailer.EnableSsl = true;
-                    mailer.Send(message);
-                }
 
-                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-                {
-                    cnn.Execute($"UPDATE Mails SET Sended='1' WHERE Name = {name};");
+                    var message = new MailMessage(rdr.GetString(6), rdr.GetString(8));
+                    message.Subject = rdr.GetString(3);
+                    message.Body = rdr.GetString(4);
+
+                    using (SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        mailer.Credentials = new NetworkCredential(rdr.GetString(6), Encryptor.Decrypt(_skey, rdr.GetString(7)));
+                        mailer.EnableSsl = true;
+                        mailer.Send(message);
+                    }
+
                 }
             }
             catch (Exception ex)
             {
                 //not send window to display
             }
+            finally
+            {
+                con.Close();
+            }
         }
 
         //delete mail from database
         public new void Delete()
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Mails WHERE Name = '{_name}';");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Mails WHERE Name = \"{_name}\" LIMIT 1;";
+            cmd.ExecuteNonQuery();
         }
 
         public new void StaticDelete(string name)
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Mails WHERE Name = '{name}';");
-            }
+            using var con = new SQLiteConnection(_sdatabase);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Mails WHERE Name = \"{name}\" LIMIT 1;";
+            cmd.ExecuteNonQuery();
         }
 
     }
@@ -265,6 +343,7 @@ namespace CustomCalendar
         //default constructor
         public CustomEvent(string id, string name, string date, string title, string description, bool reminder, string endDate, string location) : base(id, name, date, title, description, reminder)
         {
+            CreateTable();
             _id = id;
             _name = name;
             _startDate = date;
@@ -280,40 +359,64 @@ namespace CustomCalendar
         public CustomEvent(string name) : base(name)
         {
             //code re-use to make sure all data is readed correctly
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+
+            string stm = $"SELECT Id, Name, Date, Title, Description, Reminder, EndDate, Location FROM Events WHERE Name = \"{name}\" LIMIT 1;";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
             {
-                var output = cnn.Query<string>($"SELECT * FROM Events WHERE Name = '{name}';", new DynamicParameters());
-                List<string> values = output.ToList();
-                _id = values[0];
-                _name = values[1];
-                _date = values[2];
-                _title = values[3];
-                _description = values[4];
-                _reminder = values[5] == "1" ? true : false;
-                _endDate = values[6];
-                _location = values[7];
+                _id = rdr.GetInt32(0).ToString();
+                _name = rdr.GetString(1);
+                _date = rdr.GetString(2);
+                _title = rdr.GetString(3);
+                _description = rdr.GetString(4);
+                _reminder = rdr.GetString(5) == "1" ? true : false;
+                _endDate = rdr.GetString(6);
+                _location = rdr.GetString(7);
             }
+            con.Close();
         }
 
         //get values defined for event
         public string GetEventValues(string value) =>
             value.ToLower() switch
             {
-                "endDate" => _endDate,
+                "endDate"  => _endDate,
                 "location" => _location,
-                _ => "Invalid value",
+                _          => "Invalid value",
             };
+
+        //create table if no exists
+        internal new void CreateTable()
+        {
+            if (CheckForTable("Events") == false)
+            {
+                using var con = new SQLiteConnection(_database);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = @"CREATE TABLE Events(Id INTEGER PRIMARY KEY, Name TEXT,
+                Date TEXT, Title TEXT, Description TEXT, Reminder TEXT, EndDate TEXT, Location TEXT);";
+                cmd.ExecuteNonQuery();
+            }
+        }
 
         //save event to database
         public new void Save()
         {
             string reminder = _reminder == true ? "1" : "0";
 
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"INSERT INTO Mails (Name, Date, Title, Description, Sended, Login, Password, Recipent) VALUES " +
-                    $"({_name}, {_date}, {_title}, {_description}, {reminder}, {_endDate}, {_location});");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = "INSERT INTO Events(Name, Date, Title, Description, Reminder, EndDate, Location) VALUES('" + _name + "', '" + _date + "', '" + _title
+                + "', '" + _description + "', '" + reminder + "', '" + _endDate + "', '" + _location + "');";
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public void SendEvent()
@@ -426,142 +529,27 @@ namespace CustomCalendar
                 Event createdEvent = request.Execute();
             }
         }
-            //send event directly from database
-            public static void StaticSendEvent(string name)
-            {
-                //get data from database
-                List<string> values = new List<string>();
-                using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-                {
-                    var output = cnn.Query<string>($"SELECT * FROM Events WHERE Name = '{name}';", new DynamicParameters());
-                    values = output.ToList();
-                }
-
-            if (File.Exists(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\myID.setting") == false)
-            {
-                ///OPEN WINDOW WITH CALENDAR CONFIGURATION AND SET STRING myID
-
-                ///OPEN CONFIGURE SCREEN
-
-                return;
-
-            }
-            else
-            {
-                TextReader setid = new StreamReader(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\myID.setting");
-                string curID = setid.ReadLine();
-                string curSecret = setid.ReadLine();
-                string curProID = setid.ReadLine();
-                string curMail = setid.ReadLine();
-                setid.Close();
-
-
-                TextWriter credentials = new StreamWriter("credentials.json");
-                /// change project id and maybe client secret
-                credentials.WriteLine("{\"installed\":{\"client_id\":\"" + curID + "\",\"project_id\":\"" + curProID + "\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"" + curSecret + "\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\",\"http://localhost\"]}}");
-                credentials.Close();
-
-                string[] Scopes = { CalendarService.Scope.Calendar };
-                string ApplicationName = "MyCalendar Google Calendar API";
-
-
-                UserCredential credential;
-
-                using (var stream =
-                    new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
-                {
-                    // The file token.json stores the user's access and refresh tokens, and is created
-                    // automatically when the authorization flow completes for the first time.
-                    string credPath = "token.json";
-                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                }
-
-                // Create Google Calendar API service.
-                var service = new CalendarService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName,
-                });
-
-
-                int RemindTime = 0;
-
-                ChangeReminder();
-
-                void ChangeReminder()
-                {
-                    if (values[5] == "1")
-                        RemindTime = 10;
-                }
-
-                char[] sDate = values[2].ToCharArray();
-                char[] eDate = values[6].ToCharArray();
-
-                //create Event to send for calendar API
-                Event newEvent = new Event()
-                {
-                    Summary = values[3],
-                    Location = values[7],
-                    Description = values[4],
-
-                    Start = new EventDateTime()
-                    {
-                        DateTime = DateTime.Parse(sDate[6] + sDate[7] + sDate[8] + sDate[9] + "-" + sDate[3] + sDate[4] + "-" + sDate[0] + sDate[1] + "T" + sDate[11] + sDate[12] + ":" + sDate[14] + sDate[15] + ":00-07:00"),
-                        TimeZone = "Europe/Warsaw",
-                    },
-                    End = new EventDateTime()
-                    {
-                        DateTime = DateTime.Parse(eDate[6] + eDate[7] + eDate[8] + eDate[9] + "-" + eDate[3] + eDate[4] + "-" + eDate[0] + eDate[1] + "T" + eDate[11] + eDate[12] + ":" + eDate[14] + eDate[15] + ":00-07:00"),
-                        TimeZone = "Europe/Warsaw",
-                    },
-
-                    Attendees = new EventAttendee[] {
-        new EventAttendee() {
-            Organizer = true,
-            Email = curMail,
-        ResponseStatus = "accepted" }, /// automaticly confirmed
-                },
-
-                    Reminders = new Event.RemindersData()
-                    {
-                        UseDefault = false,
-                        Overrides = new EventReminder[] {
-            new EventReminder() { Method = "sms", Minutes = RemindTime },
-        }
-                    }
-
-                };
-
-
-                //Add event to calendar by google calendar API
-                String calendarId = "primary";
-                EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-                Event createdEvent = request.Execute();
-            }
-
-        }
-        
-
         //delete event from database
         public new void Delete()
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Events WHERE Name = '{_name}';");
-            }
+            using var con = new SQLiteConnection(_database);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Events WHERE Name = \"{_name}\" LIMIT 1;";
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
-        public new void StaticDelete(string name)
+        public new static void StaticDelete(string name)
         {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute($"DELETE * FROM Events WHERE Name = '{name}';");
-            }
+            using var con = new SQLiteConnection(_sdatabase);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+
+            cmd.CommandText = $"DELETE FROM Events WHERE Name = \"{name}\" LIMIT 1;";
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
     }

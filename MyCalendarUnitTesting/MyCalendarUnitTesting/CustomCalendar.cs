@@ -100,7 +100,7 @@ namespace CustomCalendar
             }
         }
 
-        internal static string LoadConnectionString(string id="Default")
+        internal static string LoadConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
