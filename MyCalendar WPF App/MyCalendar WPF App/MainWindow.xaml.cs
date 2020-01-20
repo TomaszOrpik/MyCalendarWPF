@@ -21,9 +21,15 @@ namespace MyCalendar_WPF_App
     /// </summary>
     public partial class mainWindow : Window
     {
+        AppView _view;
+        
         public mainWindow()
         {
             InitializeComponent();
+            _view = new AppView();
+            MonthCombobox.SelectedIndex = AppView.GetCurMonthIndex();
+            YearTextbox.Text = AppView.GetCurrentYear();
+            _view.Start(YearTextbox.Text, MonthCombobox.Text);
         }
     }
 

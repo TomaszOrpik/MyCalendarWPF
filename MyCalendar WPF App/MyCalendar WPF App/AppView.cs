@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,7 +11,7 @@ namespace MyCalendar_WPF_App
     class AppView
     {
         //define variables
-        private mainWindow mWindow = Application.Current.MainWindow as mainWindow;
+        mainWindow mWindow = Application.Current.MainWindow as mainWindow;
         private List<Button> _buttons;
         private Dictionary<string, int> _months;
         private (int, int) _currentDayCount;
@@ -28,7 +28,9 @@ namespace MyCalendar_WPF_App
             _b = 0;
             ResetButtons();
             _months = GetMonths();
-            currentMonthNum = _months[choosenMonth];
+            GenMonths(_months);
+            GenDayNames();
+            currentMonthNum = _months[choosenMonth]; //error
             _currentDayCount = CurrentDayCounter(year, currentMonthNum);
             _b = _currentDayCount.Item1;
             PrevMonthDays(currentMonthNum, year,_currentDayCount.Item2);
@@ -36,10 +38,10 @@ namespace MyCalendar_WPF_App
             RedDays();
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
+            //color days if data exist in database
 
         }
-
-        
+       
         //create list of buttons
         private List<Button> getButtons()
         {
@@ -167,10 +169,35 @@ namespace MyCalendar_WPF_App
                 _buttons[i].Background = Brushes.White;
             }
         }
-        //generate collection for comboBox
-         
-
-
+        //generate months for comboBox
+        private void GenMonths(Dictionary<string, int> months)
+        {
+            for(int i = 1; i <= 12; i++)
+            {
+                ComboBoxItem cbi = new ComboBoxItem();
+                cbi.Name = "month" + i;
+                cbi.Content = months.FirstOrDefault(x => x.Value == i).Key;
+                mWindow.MonthCombobox.Items.Add(cbi);
+            }
+        }
         //generate label names over buttons
+        private void GenDayNames()
+        {
+            mWindow.DayLabel1.Content = "Mon";
+            mWindow.DayLabel2.Content = "Tue";
+            mWindow.DayLabel3.Content = "Wed";
+            mWindow.DayLabel4.Content = "Thu";
+            mWindow.DayLabel5.Content = "Fri";
+            mWindow.DayLabel6.Content = "Sat";
+            mWindow.DayLabel7.Content = "Sun";
+        }
+        //get current month
+        public static int GetCurMonthIndex()
+        {
+            string todayMonth = DateTime.Now.ToString("MM");
+             return Convert.ToInt32(todayMonth) - 1;
+        }
+        //get current year
+        public static string GetCurrentYear() => DateTime.Now.ToString("yyyy");
     }
 }
