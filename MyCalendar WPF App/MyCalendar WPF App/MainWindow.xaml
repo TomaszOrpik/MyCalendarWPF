@@ -1,4 +1,4 @@
-﻿<Window x:Class="MyCalendar_WPF_App.MainWindow"
+﻿<Window x:Class="MyCalendar_WPF_App.mainWindow"
 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,54 +7,14 @@
         xmlns:local="clr-namespace:MyCalendar_WPF_App"
         mc:Ignorable="d"
         Title="MainWindow" Height="1856" Width="2312">
-    <Grid Margin="65,0,-68,0" RenderTransformOrigin="0.417,0.533" Height="1836">
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform ScaleX="-1"/>
-                <SkewTransform/>
-                <RotateTransform/>
-                <TranslateTransform X="335.818"/>
-            </TransformGroup>
-        </Grid.RenderTransform>
+    <Grid Margin="65,0,0,0" RenderTransformOrigin="0.417,0.533" Height="1854">
         <Button Content="Button" HorizontalAlignment="Left" Margin="214,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.692"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
         </Button>
         <Button Content="Button" HorizontalAlignment="Left" Margin="226,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.692"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
         </Button>
         <Button Content="Button" HorizontalAlignment="Left" Margin="202,689,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.692"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
         </Button>
         <Button Content="Button" HorizontalAlignment="Left" Margin="210,929,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.692"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
         </Button>
         <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
         <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
@@ -103,6 +63,7 @@
         <Button x:Name="ButtonCalendar41" Content="Button" HorizontalAlignment="Left" Margin="779,1253,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
         <Button x:Name="ButtonCalendar42" Content="Button" HorizontalAlignment="Left" Margin="557,1253,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
         <Label x:Name="TimeLabel" Content="Label" HorizontalAlignment="Left" Margin="1185,1447,0,0" VerticalAlignment="Top" Height="117" Width="414"/>
+        <Calendar HorizontalAlignment="Left" Margin="160,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.745,0.425"/>
 
     </Grid>
 </Window>

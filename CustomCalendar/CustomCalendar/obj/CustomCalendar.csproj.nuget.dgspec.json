@@ -42,10 +42,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.0.30, )"
-            },
             "Google.Apis.Calendar.v3": {
               "target": "Package",
               "version": "[1.43.0.1830, )"

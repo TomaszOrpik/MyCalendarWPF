@@ -9,7 +9,7 @@ namespace MyCalendar_WPF_App
 {
     class AppControl
     {
-        MainWindow window = Application.Current.MainWindow as MainWindow;
+        mainWindow window = Application.Current.MainWindow as mainWindow;
 
         public void YearKeyBlock(object sender, KeyEventArgs e)
         {
@@ -18,6 +18,7 @@ namespace MyCalendar_WPF_App
             if ((Convert.ToChar(e.Key) == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
                 e.Handled = true;
         }
+
 
     }
 }
