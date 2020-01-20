@@ -10,15 +10,18 @@ namespace MyCalendar_WPF_App
     class AppControl
     {
         mainWindow window = Application.Current.MainWindow as mainWindow;
+        //methoda przesyłająca zajęte terminy do view a następnie do kalendarza
+        //metoda przesyłająca datę z kliknięcia do control //generująca współprzedne (if exist) //zwracająca obiek
+        //metoda metoda generująca obiekt i przesyłająca go do bazy 
 
-        public void YearKeyBlock(object sender, KeyEventArgs e)
-        {
-            if (!char.IsControl(Convert.ToChar(e.Key)) && !char.IsDigit(Convert.ToChar(e.Key)) && (Convert.ToChar(e.Key) != '.'))
-                e.Handled = true;
-            if ((Convert.ToChar(e.Key) == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-                e.Handled = true;
-        }
+        //metoda dodająca pass i login do pliku config
+        //metoda szczytująca dane z pliku config
 
+        //metoda sprawdzająca czy istnieje today w bazie i wysyłająca maila
+        //metoda odpowiedzialna za konfigurację tokena google (wysyłanie danych do pliku config)
+        //metoda szczytująca również dane z pliku config
+
+        //coś o czym kurwa zapomniałem
 
     }
 }
