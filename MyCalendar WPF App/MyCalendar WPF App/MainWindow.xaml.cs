@@ -26,10 +26,12 @@ namespace MyCalendar_WPF_App
         public mainWindow()
         {
             InitializeComponent();
-            _view = new AppView();
             MonthCombobox.SelectedIndex = AppView.GetCurMonthIndex();
             YearTextbox.Text = AppView.GetCurrentYear();
-            _view.Start(YearTextbox.Text, MonthCombobox.Text);
+            _view = new AppView();
+            //MessageBox.Show(MonthCombobox.SelectionBoxItem.ToString()); YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString()
+            _view.Start();
+            _view.LoadCalendar(YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString());
         }
     }
 

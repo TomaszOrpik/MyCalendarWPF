@@ -18,7 +18,7 @@
         </Button>
         <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
         <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
-        <ComboBox x:Name="MonthCombobox" HorizontalAlignment="Left" Margin="1541,220,0,0" VerticalAlignment="Top" Width="331" Height="76"/>
+        <ComboBox x:Name="MonthCombobox" HorizontalAlignment="Left" Margin="1541,220,0,0" VerticalAlignment="Top" Width="331" Height="76" SelectedIndex="0"/>
         <TextBox x:Name="YearTextbox" HorizontalAlignment="Left" Margin="1009,236,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="501" Height="60"/>
         <Button x:Name="ButtonCalendar1" Content="Button" HorizontalAlignment="Left" Margin="512,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
         <Button x:Name="ButtonCalendar3" Content="Button" HorizontalAlignment="Left" Margin="964,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>

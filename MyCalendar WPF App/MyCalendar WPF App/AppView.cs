@@ -18,30 +18,33 @@ namespace MyCalendar_WPF_App
         private int _b; //start button index
 
         //main function to setup view
-        public void Start(string choosenYear, string choosenMonth)
+        public void Start()
         {
-            int year;
-            int currentMonthNum;
-
-            Int32.TryParse(choosenYear, out year);
             _buttons = getButtons();
             _b = 0;
             ResetButtons();
             _months = GetMonths();
             GenMonths(_months);
-            GenDayNames();
-            currentMonthNum = _months[choosenMonth]; //error
+            GenDayNames();            
+        }
+
+        public void LoadCalendar(string choosenYear, string choosenMonth)
+        {
+            int year;
+            int currentMonthNum;
+
+            Int32.TryParse(choosenYear, out year);
+            currentMonthNum = _months[choosenMonth];
             _currentDayCount = CurrentDayCounter(year, currentMonthNum);
             _b = _currentDayCount.Item1;
-            PrevMonthDays(currentMonthNum, year,_currentDayCount.Item2);
+            PrevMonthDays(currentMonthNum, year, _currentDayCount.Item2);
             CurMonthDays(year, currentMonthNum);
             RedDays();
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
             //color days if data exist in database
-
         }
-       
+
         //create list of buttons
         private List<Button> getButtons()
         {
@@ -101,7 +104,10 @@ namespace MyCalendar_WPF_App
         {
             int f = 0;
             int prevMonth = monthNumber - 1;
-            int LastDay = DateTime.DaysInMonth(year, prevMonth);
+            int tempMonth = monthNumber;
+            if (prevMonth == 0)
+                tempMonth = 12;
+            int LastDay = DateTime.DaysInMonth(year, tempMonth); //moth must be between one and 12
             int startLastMonthDay = (LastDay - day) + 1;
             for(int i = startLastMonthDay; i<=LastDay; i++)
             {
@@ -114,6 +120,7 @@ namespace MyCalendar_WPF_App
         {
             int days = DateTime.DaysInMonth(year, monthNumber);
             int c = 2;
+            _buttons[_b - 1].Content = Convert.ToString(c-1);
             _buttons[_b - 1].Background = Brushes.White;
             _buttons[_b - 1].Foreground = Brushes.Black;
             for(int i = 1; i < days; i++)
@@ -156,7 +163,7 @@ namespace MyCalendar_WPF_App
 
             if (Convert.ToString(monthNumber) + " " + Convert.ToString(year) == todayMonthYear)
             {
-                _buttons[(todayDay + d) - 1].Background = Brushes.Yellow;
+                _buttons[(todayDay + d) - 1].Foreground = Brushes.Yellow;
                 _buttons[(todayDay + d) - 1].Background = Brushes.Black;
             }
         }
