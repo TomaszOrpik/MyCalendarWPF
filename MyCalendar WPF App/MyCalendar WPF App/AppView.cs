@@ -42,7 +42,12 @@ namespace MyCalendar_WPF_App
             RedDays();
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
-            //color days if data exist in database
+            //color days if data exist in database async // get date from control
+            //create note window //send data to control
+            //create mail window
+            //create event window
+            //display note/mail/event window //get data from control
+            //display messagebox
         }
 
         //create list of buttons
@@ -198,6 +203,8 @@ namespace MyCalendar_WPF_App
             mWindow.DayLabel6.Content = "Sat";
             mWindow.DayLabel7.Content = "Sun";
         }
+        //create note window
+
         //get current month
         public static int GetCurMonthIndex()
         {
