@@ -10,13 +10,13 @@ namespace MyCalendar_WPF_App
 {
     class AppControl
     {
-        mainWindow window = Application.Current.MainWindow as mainWindow;
-        private AppControl _control = new AppControl();
+        public void SaveNote(Note note) { note.Save(); }
 
-        public void SaveNote(Note note)
-        {
-            note.Save();
-        }
+        public void SaveMail(CustomMail mail) { mail.Save(); }
+
+        public void SaveEvent(MyEvent mevent) { mevent.Save(); }
+        
+        
         //methoda przesyłająca zajęte terminy do view a następnie do kalendarza
         //metoda przesyłająca datę z kliknięcia do control //generująca współprzedne (if exist) //zwracająca obiek
         //metoda metoda generująca obiekt i przesyłająca go do bazy 

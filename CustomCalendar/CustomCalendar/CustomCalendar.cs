@@ -332,7 +332,7 @@ namespace CustomCalendar
     }
     
     //define user events
-    public class CustomEvent : Note
+    public class MyEvent : Note
     {
         //define variables
         private string _startDate;
@@ -340,7 +340,7 @@ namespace CustomCalendar
         private string _location;
 
         //default constructor
-        public CustomEvent(string name, string date, string title, string description, bool reminder, string endDate, string location) : base(name, date, title, description, reminder)
+        public MyEvent(string name, string date, string title, string description, bool reminder, string endDate, string location) : base(name, date, title, description, reminder)
         {
             CreateTable();
             _name = name;
@@ -354,7 +354,7 @@ namespace CustomCalendar
         }
 
         //alternative constructor
-        public CustomEvent(string name) : base(name)
+        public MyEvent(string name) : base(name)
         {
             //code re-use to make sure all data is readed correctly
             using var con = new SQLiteConnection(_database);

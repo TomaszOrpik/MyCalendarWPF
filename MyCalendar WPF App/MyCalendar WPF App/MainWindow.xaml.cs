@@ -36,7 +36,7 @@ namespace MyCalendar_WPF_App
 
         private void AddNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            _view.CreateNoteDisplay();
+            _view.CreateNoteDisplay("note");
         }
     }
 

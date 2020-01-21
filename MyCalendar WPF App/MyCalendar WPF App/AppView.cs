@@ -26,7 +26,7 @@ namespace MyCalendar_WPF_App
             _b = 0;
             ResetButtons();
             _months = GetMonths();
-            GenMonths(_months);
+            GenMonths(_months, mWindow.MonthCombobox);
             GenDayNames();
             _control = new AppControl();
         }
@@ -46,47 +46,114 @@ namespace MyCalendar_WPF_App
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
             //color days if data exist in database async // get date from control
-            //create note window //send data to control
-            //create mail window
-            //create event window
-            //display note/mail/event window //get data from control
+            //day click function to open all notes for current day
+            //async method for checking mails to send and send them
+            //async method for checking note reminders and display messBox you have reminder
+
+            //function for adding to config file mail and password / event token
+            
+            //main window - slider to change language (english <> polish)
+           
+            //display note/mail/event window //get data from control with delete button
             //display messagebox
         }
         //create note window
-        public void CreateNoteDisplay()
+        public void CreateNoteDisplay(string type)
         {
             AddWindow win = new AddWindow();
             win.TitleLabel.Content = "Title";
-            win.LocationLabel.Visibility = Visibility.Hidden;
-            win.LocationTextbox.Visibility = Visibility.Hidden;
-            win.PasswordLabel.Visibility = Visibility.Hidden;
-            win.PasswordTextbox.Visibility = Visibility.Hidden;
-            win.StartDateLabel.Content = "Date";
+            if(type == "mail")
+            {
+                win.LocationLabel.Visibility = Visibility.Visible;
+                win.LocationLabel.Content = "Login";
+                win.LocationTextbox.Visibility = Visibility.Visible;
+                win.PasswordLabel.Visibility = Visibility.Visible;
+                win.PasswordLabel.Content = "Password";
+                win.PasswordTextbox.Visibility = Visibility.Visible;
+                win.RecipentLabel.Visibility = Visibility.Visible;
+                win.RecipentLabel.Content = "Recipent";
+                win.RecipentTextBox.Visibility = Visibility.Visible;
+            }
+            else if(type == "event")
+            {
+                win.LocationLabel.Visibility = Visibility.Visible;
+                win.LocationLabel.Content = "Location";
+                win.LocationTextbox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                win.LocationLabel.Visibility = Visibility.Hidden;
+                win.LocationTextbox.Visibility = Visibility.Hidden;
+                win.PasswordLabel.Visibility = Visibility.Hidden;
+                win.PasswordTextbox.Visibility = Visibility.Hidden;
+                win.RecipentLabel.Visibility = Visibility.Hidden;
+                win.RecipentTextBox.Visibility = Visibility.Hidden;
+            }
+            if (type == "event")
+                win.StartDateLabel.Content = "Start Date";
+            else
+                win.StartDateLabel.Content = "Date";
             CreateHours(win.StartDateHourBox);
             CreateMinutes(win.StartDateMinBox);
+            GenMonths(_months, win.StartDayMonthBox);
             win.StartDayYearTextBox.Text = DateTime.Now.ToString("yyyy");
             win.StartDayMonthBox.SelectedIndex = DateTime.Now.Month - 1;
             CreateDayBox(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
             win.StartDateDayBox.SelectedIndex = DateTime.Now.Day - 1;
-            win.EndDateLabel.Visibility = Visibility.Hidden;
-            win.EndDateHourBox.Visibility = Visibility.Hidden;
-            win.EndDateMinBox.Visibility = Visibility.Hidden;
-            win.EndDateDayBox.Visibility = Visibility.Hidden;
-            win.EndDateMonthBox.Visibility = Visibility.Hidden;
-            win.EndDateYearTextBox.Visibility = Visibility.Hidden;
+            if(type == "event")
+            {
+                win.EndDateLabel.Content = "End Date";
+                CreateHours(win.EndDateHourBox);
+                CreateMinutes(win.EndDateMinBox);
+                GenMonths(_months, win.EndDateDayBox);
+                win.EndDateYearTextBox.Text = DateTime.Now.ToString("yyyy");
+                win.EndDateMonthBox.SelectedIndex = DateTime.Now.Month - 1;
+                CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex + 1);
+                win.EndDateDayBox.SelectedIndex = DateTime.Now.Day - 1;
+            }
+            else
+            {
+                //can be blocked in xml for shorter code
+                win.EndDateLabel.Visibility = Visibility.Hidden;
+                win.EndDateHourBox.Visibility = Visibility.Hidden;
+                win.EndDateMinBox.Visibility = Visibility.Hidden;
+                win.EndDateDayBox.Visibility = Visibility.Hidden;
+                win.EndDateMonthBox.Visibility = Visibility.Hidden;
+                win.EndDateYearTextBox.Visibility = Visibility.Hidden;
+            }
             win.DescriptionTextBlock.Text = "Description";
             win.ReminderCheckBox.Content = "Reminder";
-            win.StartDayMonthBox.SelectionChanged += (sender, e) => StartDayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
-            win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString(),
+            win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
+           
+            //for end date win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
+            if (type == "note")
+                win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString()+ win.StartDateHourBox.SelectedItem.ToString()+win.StartDateMinBox.SelectedItem.ToString(),
                                                                         $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                         win.TitleTextbox.Text,
                                                                         win.DescriptionTextBlock.Text,
                                                                         win.ReminderCheckBox.IsChecked.Value);
+            if(type == "mail")
+                win.SaveButton.Click += (sender, e) => SaveMailButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
+                                                                       $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
+                                                                       win.TitleTextbox.Text,
+                                                                       win.DescriptionTextBlock.Text,
+                                                                       win.ReminderCheckBox.IsChecked.Value,
+                                                                       win.LocationTextbox.Text,
+                                                                       win.PasswordTextbox.Text,
+                                                                       win.RecipentTextBox.Text);
+            if (type == "event")
+                win.SaveButton.Click += (sender, e) => SaveEventButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
+                                                                       $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
+                                                                       win.TitleTextbox.Text,
+                                                                       win.DescriptionTextBlock.Text,
+                                                                       win.ReminderCheckBox.IsChecked.Value,
+                                                                       $"{win.EndDateDayBox.SelectedItem.ToString()}-{win.EndDateMonthBox.SelectedItem.ToString()}-{win.EndDateYearTextBox.Text} {win.EndDateHourBox.SelectedItem.ToString()}:{win.EndDateMinBox.SelectedItem.ToString()}",
+                                                                       win.LocationTextbox.Text);
 
             win.Show();
         }
         //send data through changed month for generate correct number of days
-        private void StartDayMonthBox_SelectionChanged(ComboBox cb, int year, int month)
+        private void DayMonthBox_SelectionChanged(ComboBox cb, int year, int month)
         {
             CreateDayBox(cb, year, month);
         }
@@ -96,6 +163,16 @@ namespace MyCalendar_WPF_App
         {
             Note note = new Note(name, date, title, description, reminder);
             _control.SaveNote(note);
+        }
+        private void SaveMailButton_Click(string name, string date, string title, string description, bool reminder, string login, string password, string recipent)
+        {
+            CustomMail mail = new CustomMail(name, date, title, description, reminder, login, password, recipent);
+            _control.SaveMail(mail);
+        }
+        private void SaveEventButton_Click(string name, string date, string title, string description, bool reminder, string endDate, string location)
+        {
+            MyEvent mevent = new MyEvent(name, date, title, description, reminder, endDate, location);
+            _control.SaveEvent(mevent);
         }
 
         //create list of buttons
@@ -230,14 +307,14 @@ namespace MyCalendar_WPF_App
             }
         }
         //generate months for comboBox
-        private void GenMonths(Dictionary<string, int> months)
+        private void GenMonths(Dictionary<string, int> months, ComboBox cb)
         {
             for(int i = 1; i <= 12; i++)
             {
                 ComboBoxItem cbi = new ComboBoxItem();
                 cbi.Name = "month" + i;
                 cbi.Content = months.FirstOrDefault(x => x.Value == i).Key;
-                mWindow.MonthCombobox.Items.Add(cbi);
+                cb.Items.Add(cbi);
             }
         }
         //generate label names over buttons
