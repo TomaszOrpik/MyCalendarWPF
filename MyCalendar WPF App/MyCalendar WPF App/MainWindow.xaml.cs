@@ -38,6 +38,31 @@ namespace MyCalendar_WPF_App
         {
             _view.CreateNoteDisplay("note");
         }
+
+        private void AddMailButton_Click(object sender, RoutedEventArgs e)
+        {
+            _view.CreateNoteDisplay("mail");
+        }
+
+        private void AddEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            _view.CreateNoteDisplay("event");
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrevButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

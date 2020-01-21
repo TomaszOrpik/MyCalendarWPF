@@ -10,14 +10,14 @@
     <Grid Margin="65,0,0,0" RenderTransformOrigin="0.417,0.533" Height="1854">
         <Button x:Name="AddNoteButton" Content="Button" HorizontalAlignment="Left" Margin="214,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddNoteButton_Click">
         </Button>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="226,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+        <Button x:Name="AddMailButton" Content="Button" HorizontalAlignment="Left" Margin="226,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddMailButton_Click">
         </Button>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="202,689,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+        <Button x:Name="AddEventButton" Content="Button" HorizontalAlignment="Left" Margin="202,689,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddEventButton_Click">
         </Button>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="210,929,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275">
+        <Button x:Name="SettingsButton" Content="Button" HorizontalAlignment="Left" Margin="210,929,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="SettingsButton_Click">
         </Button>
-        <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
-        <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230"/>
+        <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230" Click="PrevButton_Click"/>
+        <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230" Click="NextButton_Click"/>
         <ComboBox x:Name="MonthCombobox" HorizontalAlignment="Left" Margin="1541,220,0,0" VerticalAlignment="Top" Width="331" Height="76" SelectedIndex="0"/>
         <TextBox x:Name="YearTextbox" HorizontalAlignment="Left" Margin="1009,236,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="501" Height="60"/>
         <Button x:Name="ButtonCalendar1" Content="Button" HorizontalAlignment="Left" Margin="512,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>

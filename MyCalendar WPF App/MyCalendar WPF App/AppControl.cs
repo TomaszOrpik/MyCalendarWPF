@@ -15,6 +15,12 @@ namespace MyCalendar_WPF_App
         public void SaveMail(CustomMail mail) { mail.Save(); }
 
         public void SaveEvent(MyEvent mevent) { mevent.Save(); }
+
+        public void DeleteNote(string name) { Note.StaticDelete(name); }
+
+        public void DeleteMail(string name) { CustomMail.StaticDelete(name); }
+
+        public void DeleteEvent(string name) { MyEvent.StaticDelete(name); }
         
         
         //methoda przesyłająca zajęte terminy do view a następnie do kalendarza

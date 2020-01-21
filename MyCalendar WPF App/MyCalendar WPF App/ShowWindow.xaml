@@ -9,12 +9,12 @@
     <Grid>
         <Label x:Name="TitleLabel" Content="Label" HorizontalAlignment="Left" Margin="121,55,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LocationLabel" Content="Label" HorizontalAlignment="Left" Margin="121,86,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="PasswordLabel" Content="Label" HorizontalAlignment="Left" Margin="121,139,0,0" VerticalAlignment="Top"/>
         <Label x:Name="StartDateLabel" Content="Label" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top"/>
         <Label x:Name="EndDateLabel" Content="Label" HorizontalAlignment="Center" Margin="0,139,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DescriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Center"/>
+        <Label x:Name="DescriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="121,160,0,0" VerticalAlignment="Top"/>
         <Label x:Name="ReminderLabel" Content="Label" HorizontalAlignment="Left" Margin="121,379,0,0" VerticalAlignment="Top"/>
         <Button x:Name="DeleteButton" Content="Button" HorizontalAlignment="Left" Margin="597,379,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="RecipentLabel" Content="Label" HorizontalAlignment="Left" Margin="121,121,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

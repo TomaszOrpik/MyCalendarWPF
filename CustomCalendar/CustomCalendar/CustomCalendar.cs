@@ -319,7 +319,7 @@ namespace CustomCalendar
             cmd.ExecuteNonQuery();
         }
 
-        public new void StaticDelete(string name)
+        public new static void StaticDelete(string name)
         {
             using var con = new SQLiteConnection(_sdatabase);
             con.Open();

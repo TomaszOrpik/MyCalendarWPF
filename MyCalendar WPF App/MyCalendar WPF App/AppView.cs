@@ -46,7 +46,7 @@ namespace MyCalendar_WPF_App
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
             //color days if data exist in database async // get date from control
-            //day click function to open all notes for current day
+            //day click function to open all notes for current day by loop to all days with generate calendar method
             //async method for checking mails to send and send them
             //async method for checking note reminders and display messBox you have reminder
 
@@ -175,6 +175,60 @@ namespace MyCalendar_WPF_App
             _control.SaveEvent(mevent);
         }
 
+        //show note window
+        public void ShowNoteDisplay(Note note)
+        {
+            ShowWindow sw = new ShowWindow();
+
+            sw.TitleLabel.Content = note.GetValue("title");
+            sw.LocationLabel.Visibility = Visibility.Hidden;
+            sw.RecipentLabel.Visibility = Visibility.Hidden;
+            sw.EndDateLabel.Visibility = Visibility.Hidden;
+            sw.StartDateLabel.Content = note.GetValue("date");
+            sw.DescriptionLabel.Content = note.GetValue("description");
+            sw.ReminderLabel.Content = note.GetReminder() ? "Reminder Active" : "Reminder Not Active";
+
+            sw.DeleteButton.Click += (sender, e) => DeleteNoteButton_Click(note.GetValue("name"));
+        }
+
+        private void DeleteNoteButton_Click(string name) { _control.DeleteNote(name); }
+
+        //show mail window
+        public void ShowMailDisplay(CustomMail mail)
+        {
+            ShowWindow sw = new ShowWindow();
+
+            sw.TitleLabel.Content = mail.GetValue("title");
+            sw.LocationLabel.Content = mail.GetMailValues("login");
+            sw.RecipentLabel.Content = mail.GetMailValues("recipent");
+            sw.EndDateLabel.Visibility = Visibility.Hidden;
+            sw.StartDateLabel.Content = mail.GetValue("date");
+            sw.DescriptionLabel.Content = mail.GetValue("description");
+            sw.ReminderLabel.Content = mail.GetSended() ? "Message Sended" : "Message Not Sended";
+
+            sw.DeleteButton.Click += (sender, e) => DeleteMailButton_Click(mail.GetValue("name"));
+        }
+
+        private void DeleteMailButton_Click(string name) { _control.DeleteMail(name); }
+
+        //show event window
+        public void ShowEventDisplay(MyEvent mevent)
+        {
+            ShowWindow sw = new ShowWindow();
+
+            sw.TitleLabel.Content = mevent.GetValue("title");
+            sw.LocationLabel.Content = mevent.GetEventValues("location");
+            sw.RecipentLabel.Visibility = Visibility.Hidden;
+            sw.StartDateLabel.Content = mevent.GetValue("date");
+            sw.EndDateLabel.Content = mevent.GetEventValues("endDate");
+            sw.DescriptionLabel.Content = mevent.GetValue("description");
+            sw.ReminderLabel.Content = mevent.GetReminder() ? "You set SMS Reminder" : "You didn't set SMS Reminder";
+
+            sw.DeleteButton.Click += (sender, e) => DeleteEventButton_Click(mevent.GetValue("name"));
+        }
+
+        private void DeleteEventButton_Click(string name) { _control.DeleteEvent(name); }
+        
         //create list of buttons
         private List<Button> getButtons()
         {
