@@ -9,7 +9,6 @@
       "CustomCalendar/1.0.0": {
         "dependencies": {
           "Google.Apis.Calendar.v3": "1.43.0.1830",
-          "MaterialDesignColors": "1.2.2",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.Odbc": "4.7.0",
           "System.Data.SQLite.Core": "1.0.112"
@@ -66,14 +65,6 @@
           "lib/netstandard2.0/Google.Apis.Core.dll": {
             "assemblyVersion": "1.43.0.0",
             "fileVersion": "1.43.0.0"
-          }
-        }
-      },
-      "MaterialDesignColors/1.2.2": {
-        "runtime": {
-          "lib/netcoreapp3.0/MaterialDesignColors.dll": {
-            "assemblyVersion": "1.2.2.920",
-            "fileVersion": "1.2.2.920"
           }
         }
       },
@@ -1091,13 +1082,6 @@
       "sha512": "sha512-Y5uzXQP58JFV1VKENO+/IALD1ID8PSff8jFVL9jYUdiXKCI82/1hR8PAx4sQcAenFrFgCNAPSwYJRFJ46OvtBQ==",
       "path": "google.apis.core/1.43.0",
       "hashPath": "google.apis.core.1.43.0.nupkg.sha512"
-    },
-    "MaterialDesignColors/1.2.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-RGy0WREmcn4YcygOlIn4TnvmuVGEM4h7s6Ydw8KQu9igjZPvZm07iXLVgBzNiOtTXVqsGpQ6i7L6aZEXGetWKg==",
-      "path": "materialdesigncolors/1.2.2",
-      "hashPath": "materialdesigncolors.1.2.2.nupkg.sha512"
     },
     "Microsoft.CSharp/4.3.0": {
       "type": "package",
