@@ -42,8 +42,8 @@ namespace MyCalendar_WPF_App
             _b = _currentDayCount.Item1;
             PrevMonthDays(currentMonthNum, year, _currentDayCount.Item2);
             CurMonthDays(year, currentMonthNum);
-            RedDays();
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
+            RedDays();
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
             //color days if data exist in database async // get date from control
             //day click function to open all notes for current day by loop to all days with generate calendar method
