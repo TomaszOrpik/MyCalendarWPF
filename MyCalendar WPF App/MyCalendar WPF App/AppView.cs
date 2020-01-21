@@ -53,10 +53,13 @@ namespace MyCalendar_WPF_App
             //function for adding to config file mail and password / event token
             
             //main window - slider to change language (english <> polish)
-           
-            //display note/mail/event window //get data from control with delete button
+
             //display messagebox
+
+            //add to add window if reminder/sended - mail send and event.add
+            //change sending form name to object
         }
+
         //create note window
         public void CreateNoteDisplay(string type)
         {
@@ -122,7 +125,10 @@ namespace MyCalendar_WPF_App
                 win.EndDateYearTextBox.Visibility = Visibility.Hidden;
             }
             win.DescriptionTextBlock.Text = "Description";
-            win.ReminderCheckBox.Content = "Reminder";
+            if (type == "mail")
+                win.ReminderCheckBox.Content = "Send now?";
+            else
+                win.ReminderCheckBox.Content = "Reminder";
             win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
            
             //for end date win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
@@ -130,13 +136,13 @@ namespace MyCalendar_WPF_App
                 win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString()+ win.StartDateHourBox.SelectedItem.ToString()+win.StartDateMinBox.SelectedItem.ToString(),
                                                                         $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                         win.TitleTextbox.Text,
-                                                                        win.DescriptionTextBlock.Text,
+                                                                        win.DescriptionRichTextBox.Selection.Text,
                                                                         win.ReminderCheckBox.IsChecked.Value);
             if(type == "mail")
                 win.SaveButton.Click += (sender, e) => SaveMailButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
                                                                        $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                        win.TitleTextbox.Text,
-                                                                       win.DescriptionTextBlock.Text,
+                                                                       win.DescriptionRichTextBox.Selection.Text,
                                                                        win.ReminderCheckBox.IsChecked.Value,
                                                                        win.LocationTextbox.Text,
                                                                        win.PasswordTextbox.Text,
@@ -145,7 +151,7 @@ namespace MyCalendar_WPF_App
                 win.SaveButton.Click += (sender, e) => SaveEventButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
                                                                        $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                        win.TitleTextbox.Text,
-                                                                       win.DescriptionTextBlock.Text,
+                                                                       win.DescriptionRichTextBox.Selection.Text,
                                                                        win.ReminderCheckBox.IsChecked.Value,
                                                                        $"{win.EndDateDayBox.SelectedItem.ToString()}-{win.EndDateMonthBox.SelectedItem.ToString()}-{win.EndDateYearTextBox.Text} {win.EndDateHourBox.SelectedItem.ToString()}:{win.EndDateMinBox.SelectedItem.ToString()}",
                                                                        win.LocationTextbox.Text);

@@ -25,11 +25,18 @@
         <ComboBox x:Name="EndDateMonthBox" HorizontalAlignment="Left" Margin="488,280,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
         <TextBlock x:Name="EndDateYearTextBox" HorizontalAlignment="Left" Margin="685,291,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label x:Name="EndDateLabel" Content="Label" HorizontalAlignment="Left" Margin="103,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.228,-1.011"/>
-        <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Left" Margin="81,336,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="101"/>
+        <TextBlock x:Name="DescriptionTextBlock" HorizontalAlignment="Left" Margin="30,335,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="102"/>
         <Button x:Name="SaveButton" Content="Button" HorizontalAlignment="Left" Margin="315,396,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="ReminderCheckBox" Content="CheckBox" HorizontalAlignment="Left" Margin="610,384,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RecipentLabel" Content="Label" HorizontalAlignment="Left" Margin="229,159,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="RecipentTextBox" HorizontalAlignment="Left" Margin="355,172,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <RichTextBox x:Name="DescriptionRichTextBox" Margin="122,352,225,50">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>

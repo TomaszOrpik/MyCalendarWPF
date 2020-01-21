@@ -12,9 +12,18 @@ namespace MyCalendar_WPF_App
     {
         public void SaveNote(Note note) { note.Save(); }
 
-        public void SaveMail(CustomMail mail) { mail.Save(); }
+        public void SaveMail(CustomMail mail) 
+        {
+            if (mail.GetReminder())
+                mail.SendMail();
+            mail.Save(); 
+        }
 
-        public void SaveEvent(MyEvent mevent) { mevent.Save(); }
+        public void SaveEvent(MyEvent mevent) 
+        {
+            mevent.SendEvent();
+            mevent.Save(); 
+        }
 
         public void DeleteNote(string name) { Note.StaticDelete(name); }
 
