@@ -34,10 +34,9 @@ namespace CustomCalendar
 
 
         //default constructor
-        public Note(string id, string name, string date, string title, string description, bool reminder)
+        public Note(string name, string date, string title, string description, bool reminder)
         {
             CreateTable();
-            _id = id;
             _name = name;
             _date = date;
             _title = title;
@@ -167,7 +166,7 @@ namespace CustomCalendar
         private static string _skey = "poiuytrewq128954";
 
         //default constructor
-        public CustomMail(string id, string name, string date, string title, string description, bool reminder, string login, string password, string recipent) : base(id, name, date, title, description, reminder)
+        public CustomMail(string name, string date, string title, string description, bool reminder, string login, string password, string recipent) : base(name, date, title, description, reminder)
         {
             CreateTable();
             _sended = reminder;
@@ -341,10 +340,9 @@ namespace CustomCalendar
         private string _location;
 
         //default constructor
-        public CustomEvent(string id, string name, string date, string title, string description, bool reminder, string endDate, string location) : base(id, name, date, title, description, reminder)
+        public CustomEvent(string name, string date, string title, string description, bool reminder, string endDate, string location) : base(name, date, title, description, reminder)
         {
             CreateTable();
-            _id = id;
             _name = name;
             _startDate = date;
             _title = title;

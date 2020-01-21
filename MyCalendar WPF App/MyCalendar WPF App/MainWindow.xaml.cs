@@ -33,6 +33,11 @@ namespace MyCalendar_WPF_App
             _view.Start();
             _view.LoadCalendar(YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString());
         }
+
+        private void AddNoteButton_Click(object sender, RoutedEventArgs e)
+        {
+            _view.CreateNoteDisplay();
+        }
     }
 
 }
