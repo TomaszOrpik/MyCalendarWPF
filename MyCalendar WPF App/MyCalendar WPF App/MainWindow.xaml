@@ -6,70 +6,96 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCalendar_WPF_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1856" Width="2312">
-    <Grid Margin="65,0,0,0" RenderTransformOrigin="0.417,0.533" Height="1854">
-        <Button x:Name="AddNoteButton" Content="Button" HorizontalAlignment="Left" Margin="214,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddNoteButton_Click">
+        Title="MyCalendar" Height="700" Width="980">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.25*"></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            
+        </Grid.RowDefinitions>
+
+        <Button x:Name="AddNoteButton" Content="Button" Grid.Column="0" Grid.Row="2" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"  Click="AddNoteButton_Click">
         </Button>
-        <Button x:Name="AddMailButton" Content="Button" HorizontalAlignment="Left" Margin="226,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddMailButton_Click">
+        <Button x:Name="AddMailButton" Content="Button" Grid.Column="0" Grid.Row="3" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddMailButton_Click">
         </Button>
-        <Button x:Name="AddEventButton" Content="Button" HorizontalAlignment="Left" Margin="202,689,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="AddEventButton_Click">
+        <Button x:Name="AddEventButton" Content="Button" Grid.Column="0" Grid.Row="4" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddEventButton_Click">
         </Button>
-        <Button x:Name="SettingsButton" Content="Button" HorizontalAlignment="Left" Margin="210,929,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="130" Width="275" Click="SettingsButton_Click">
+        <Button x:Name="SettingsButton" Content="Button" Grid.Column="0" Grid.Row="5" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="SettingsButton_Click">
         </Button>
-        <Button x:Name="PrevButton" Content="Button" HorizontalAlignment="Left" Margin="1926,191,0,0" VerticalAlignment="Top" Height="105" Width="230" Click="PrevButton_Click"/>
-        <Button x:Name="NextButton" Content="Button" HorizontalAlignment="Left" Margin="557,191,0,0" VerticalAlignment="Top" Height="105" Width="230" Click="NextButton_Click"/>
-        <ComboBox x:Name="MonthCombobox" HorizontalAlignment="Left" Margin="1541,220,0,0" VerticalAlignment="Top" Width="331" Height="76" SelectedIndex="0"/>
-        <TextBox x:Name="YearTextbox" HorizontalAlignment="Left" Margin="1009,236,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="501" Height="60"/>
-        <Button x:Name="ButtonCalendar1" Content="Button" HorizontalAlignment="Left" Margin="512,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar3" Content="Button" HorizontalAlignment="Left" Margin="964,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar2" Content="Button" HorizontalAlignment="Left" Margin="730,494,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar4" Content="Button" HorizontalAlignment="Left" Margin="1198,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar5" Content="Button" HorizontalAlignment="Left" Margin="1407,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar6" Content="Button" HorizontalAlignment="Left" Margin="1626,499,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar7" Content="Button" HorizontalAlignment="Left" Margin="1881,494,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar8" Content="Button" HorizontalAlignment="Left" Margin="512,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar10" Content="Button" HorizontalAlignment="Left" Margin="964,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar9" Content="Button" HorizontalAlignment="Left" Margin="730,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar11" Content="Button" HorizontalAlignment="Left" Margin="1198,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar12" Content="Button" HorizontalAlignment="Left" Margin="1407,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar13" Content="Button" HorizontalAlignment="Left" Margin="1626,653,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar14" Content="Button" HorizontalAlignment="Left" Margin="1881,648,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar15" Content="Button" HorizontalAlignment="Left" Margin="512,805,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar17" Content="Button" HorizontalAlignment="Left" Margin="964,805,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar16" Content="Button" HorizontalAlignment="Left" Margin="736,800,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar18" Content="Button" HorizontalAlignment="Left" Margin="1198,805,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar19" Content="Button" HorizontalAlignment="Left" Margin="1407,805,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar20" Content="Button" HorizontalAlignment="Left" Margin="1626,805,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar21" Content="Button" HorizontalAlignment="Left" Margin="1881,800,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar22" Content="Button" HorizontalAlignment="Left" Margin="512,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar24" Content="Button" HorizontalAlignment="Left" Margin="964,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar23" Content="Button" HorizontalAlignment="Left" Margin="736,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar25" Content="Button" HorizontalAlignment="Left" Margin="1198,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar26" Content="Button" HorizontalAlignment="Left" Margin="1407,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar27" Content="Button" HorizontalAlignment="Left" Margin="1626,950,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar28" Content="Button" HorizontalAlignment="Left" Margin="1881,945,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar29" Content="Button" HorizontalAlignment="Left" Margin="512,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar31" Content="Button" HorizontalAlignment="Left" Margin="964,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar30" Content="Button" HorizontalAlignment="Left" Margin="736,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar32" Content="Button" HorizontalAlignment="Left" Margin="1198,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar33" Content="Button" HorizontalAlignment="Left" Margin="1407,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar34" Content="Button" HorizontalAlignment="Left" Margin="1626,1090,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar35" Content="Button" HorizontalAlignment="Left" Margin="1881,1085,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar36" Content="Button" HorizontalAlignment="Left" Margin="512,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar38" Content="Button" HorizontalAlignment="Left" Margin="964,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar37" Content="Button" HorizontalAlignment="Left" Margin="736,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar39" Content="Button" HorizontalAlignment="Left" Margin="1198,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar40" Content="Button" HorizontalAlignment="Left" Margin="1407,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar41" Content="Button" HorizontalAlignment="Left" Margin="1626,1251,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Button x:Name="ButtonCalendar42" Content="Button" HorizontalAlignment="Left" Margin="1881,1246,0,0" VerticalAlignment="Top" Height="111" Width="160"/>
-        <Label x:Name="TimeLabel" Content="Label" HorizontalAlignment="Left" Margin="1124,1440,0,0" VerticalAlignment="Top" Height="117" Width="414"/>
-        <Label x:Name="DayLabel1" Content="Label" HorizontalAlignment="Left" Margin="557,422,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel2" Content="Label" HorizontalAlignment="Left" Margin="787,422,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel3" Content="Label" HorizontalAlignment="Left" Margin="1044,422,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel4" Content="Label" HorizontalAlignment="Left" Margin="1231,384,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel5" Content="Label" HorizontalAlignment="Left" Margin="1487,410,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel6" Content="Label" HorizontalAlignment="Left" Margin="1706,422,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="DayLabel7" Content="Label" HorizontalAlignment="Left" Margin="1961,423,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="PrevButton" Content="Button" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Click="PrevButton_Click"/>
+        <Button x:Name="NextButton" Content="Button" Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center"  Click="NextButton_Click"/>
+        <ComboBox x:Name="MonthCombobox" Grid.Column="4" Grid.Row="0"  VerticalAlignment="Center"   SelectedIndex="0"/>
+        <TextBox x:Name="YearTextbox" Grid.Column="5" Grid.Row="0" Width="101" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="TextBox" />
+        
+        <Button x:Name="ButtonCalendar1" Content="Button" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar2" Content="Button" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar3" Content="Button" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar4" Content="Button" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar5" Content="Button" Grid.Column="6" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar6" Content="Button" Grid.Column="7" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar7" Content="Button" Grid.Column="8" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar8" Content="Button" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar9" Content="Button" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar10" Content="Button" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar11" Content="Button" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar12" Content="Button" Grid.Column="6" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar13" Content="Button" Grid.Column="7" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar14" Content="Button" Grid.Column="8" Grid.Row="3" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar15" Content="Button" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar16" Content="Button" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar17" Content="Button" Grid.Column="4" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar18" Content="Button" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar19" Content="Button" Grid.Column="6" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar20" Content="Button" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar21" Content="Button" Grid.Column="8" Grid.Row="4" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar22" Content="Button" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar23" Content="Button" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar24" Content="Button" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar25" Content="Button" Grid.Column="5" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar26" Content="Button" Grid.Column="6" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar27" Content="Button" Grid.Column="7" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar28" Content="Button" Grid.Column="8" Grid.Row="5" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar29" Content="Button" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar30" Content="Button" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar31" Content="Button" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar32" Content="Button" Grid.Column="5" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar33" Content="Button" Grid.Column="6" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar34" Content="Button" Grid.Column="7" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar35" Content="Button" Grid.Column="8" Grid.Row="6" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar36" Content="Button" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar37" Content="Button" Grid.Column="3" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar38" Content="Button" Grid.Column="4" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar39" Content="Button" Grid.Column="5" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar40" Content="Button" Grid.Column="6" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar41" Content="Button" Grid.Column="7" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Button x:Name="ButtonCalendar42" Content="Button" Grid.Column="8" Grid.Row="7" HorizontalAlignment="Stretch" Height="auto" />
+        <Label x:Name="TimeLabel" Content="Label" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="DayLabel1" Content="Label" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel2" Content="Label" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel3" Content="Label" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel4" Content="Label" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel5" Content="Label" Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel6" Content="Label" Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center" />
+        <Label x:Name="DayLabel7" Content="Label" Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center" />
 
     </Grid>
 </Window>

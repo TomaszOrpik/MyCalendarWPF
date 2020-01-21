@@ -353,8 +353,8 @@ namespace MyCalendar_WPF_App
 
             if (Convert.ToString(monthNumber) + " " + Convert.ToString(year) == todayMonthYear)
             {
-                _buttons[(todayDay + d) - 1].Foreground = Brushes.Yellow;
-                _buttons[(todayDay + d) - 1].Background = Brushes.Black;
+                _buttons[(todayDay + d) - 1].Foreground = Brushes.White;
+                _buttons[(todayDay + d) - 1].Background = Brushes.DeepSkyBlue;
             }
         }
         //set color of buttons to default

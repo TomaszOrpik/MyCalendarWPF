@@ -16,3 +16,6 @@ D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\bin\Debug\netcor
 D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\obj\Debug\netcoreapp3.1\CustomCalendar.csprojAssemblyReference.cache
 D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\obj\Debug\netcoreapp3.1\CustomCalendar.AssemblyInfoInputs.cache
 D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\obj\Debug\netcoreapp3.1\CustomCalendar.AssemblyInfo.cs
+D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\bin\Debug\netcoreapp3.1\CustomCalendar.pdb
+D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\obj\Debug\netcoreapp3.1\CustomCalendar.dll
+D:\projekty\MyCalendar\MyCalendar\CustomCalendar\CustomCalendar\obj\Debug\netcoreapp3.1\CustomCalendar.pdb
