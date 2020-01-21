@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,20 @@ namespace MyCalendar_WPF_App
         public void DeleteMail(string name) { CustomMail.StaticDelete(name); }
 
         public void DeleteEvent(string name) { MyEvent.StaticDelete(name); }
+
+        //method to save settings to App.Config file
+        public string GetSetting(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+
+        public void SetSetting(string key, string value)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.Save(ConfigurationSaveMode.Full, true);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
         
         
         //methoda przesyłająca zajęte terminy do view a następnie do kalendarza

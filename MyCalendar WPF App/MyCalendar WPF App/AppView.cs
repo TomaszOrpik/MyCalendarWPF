@@ -55,9 +55,6 @@ namespace MyCalendar_WPF_App
             //main window - slider to change language (english <> polish)
 
             //display messagebox
-
-            //add to add window if reminder/sended - mail send and event.add
-            //change sending form name to object
         }
 
         //create note window
@@ -131,7 +128,6 @@ namespace MyCalendar_WPF_App
                 win.ReminderCheckBox.Content = "Reminder";
             win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
            
-            //for end date win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
             if (type == "note")
                 win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString()+ win.StartDateHourBox.SelectedItem.ToString()+win.StartDateMinBox.SelectedItem.ToString(),
                                                                         $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
