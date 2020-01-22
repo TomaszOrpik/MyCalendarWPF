@@ -27,25 +27,26 @@ namespace MyCalendar_WPF_App
         {
             InitializeComponent();
             MonthCombobox.SelectedIndex = AppView.GetCurMonthIndex();
-            YearTextbox.Text = AppView.GetCurrentYear();
+            YearCombobox.Text = AppView.GetCurrentYear();
             _view = new AppView();
             //MessageBox.Show(MonthCombobox.SelectionBoxItem.ToString()); YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString()
             _view.Start();
-            MonthCombobox.SelectedItem = AppView.SetCurrentMonth(_view.GetMonths());
-            _view.LoadCalendar(YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString());
-            
+            _view.LoadCalendar(YearCombobox.Text, MonthCombobox.SelectionBoxItem.ToString());
+            AppView.SetCurrentMonth(_view.GetMonths(), MonthCombobox);
+
+
 
             MonthCombobox.SelectionChanged += (o, e) => RefreshCalendar();
-            //YearTextbox.Text += (o, e) => RefreshCalendar();
+            YearCombobox.SelectionChanged += (o, e) => RefreshCalendar();
         }
 
         private void RefreshCalendar()
         {
             if (MonthCombobox.SelectedItem == null) return;
-            if (String.IsNullOrEmpty(YearTextbox.Text)) return;
+            if (YearCombobox.SelectedItem == null) return;
 
             string month = MonthCombobox.SelectionBoxItem.ToString();
-            string year = YearTextbox.Text;
+            string year = YearCombobox.SelectionBoxItem.ToString();
 
             _view.LoadCalendar(year, month);
         }

@@ -26,8 +26,11 @@ namespace MyCalendar_WPF_App
             _b = 0;
             ResetButtons();
             _months = GetMonths();
-            GenMonths(_months, mWindow.MonthCombobox);
-            GenDayNames();
+            GenerateMonths(_months, mWindow.MonthCombobox);
+            GenerateYears(mWindow.YearCombobox);
+            SetCurrentMonth(_months, mWindow.MonthCombobox);
+            SetCurrentYear(mWindow.YearCombobox);
+            GenerateDayNames();
             _control = new AppControl();
         }
 
@@ -53,7 +56,7 @@ namespace MyCalendar_WPF_App
             //async method for checking note reminders and display messBox you have reminder
 
             //function for adding to config file mail and password / event token
-            
+
             //main window - slider to change language (english <> polish)
 
             //display messagebox
@@ -97,7 +100,7 @@ namespace MyCalendar_WPF_App
                 win.StartDateLabel.Content = "Date";
             CreateHours(win.StartDateHourBox);
             CreateMinutes(win.StartDateMinBox);
-            GenMonths(_months, win.StartDayMonthBox);
+            GenerateMonths(_months, win.StartDayMonthBox);
             win.StartDayYearTextBox.Text = DateTime.Now.ToString("yyyy");
             win.StartDayMonthBox.SelectedIndex = DateTime.Now.Month - 1;
             CreateDayBox(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
@@ -107,7 +110,7 @@ namespace MyCalendar_WPF_App
                 win.EndDateLabel.Content = "End Date";
                 CreateHours(win.EndDateHourBox);
                 CreateMinutes(win.EndDateMinBox);
-                GenMonths(_months, win.EndDateDayBox);
+                GenerateMonths(_months, win.EndDateDayBox);
                 win.EndDateYearTextBox.Text = DateTime.Now.ToString("yyyy");
                 win.EndDateMonthBox.SelectedIndex = DateTime.Now.Month - 1;
                 CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex + 1);
@@ -265,6 +268,8 @@ namespace MyCalendar_WPF_App
 
             return months;
         }
+
+        
         //get current day number
         private (int, int) CurrentDayCounter(int year, int month)
         {
@@ -365,7 +370,7 @@ namespace MyCalendar_WPF_App
             }
         }
         //generate months for comboBox
-        private void GenMonths(Dictionary<string, int> months, ComboBox cb)
+        private void GenerateMonths(Dictionary<string, int> months, ComboBox cb)
         {
             for(int i = 1; i <= 12; i++)
             {
@@ -376,12 +381,27 @@ namespace MyCalendar_WPF_App
             }
         }
 
-        internal static string SetCurrentMonth(Dictionary<string, int> months)
+        private void GenerateYears(ComboBox cb)
         {
-            return months.FirstOrDefault(x => x.Value == 1).Key;
+            for (int i = -50; i < 50; i++)
+            {
+                cb.Items.Add(DateTime.Today.AddYears(i).Year);
+            }
         }
+
+        internal static void SetCurrentMonth(Dictionary<string, int> months, ComboBox cb)
+        {
+            if (months.ContainsKey(DateTime.Today.ToString("MMMM")))
+                cb.SelectedIndex = months.FirstOrDefault(x => x.Value == Int32.Parse(DateTime.Now.Month.ToString())).Value;
+        }
+
+        internal static void SetCurrentYear(ComboBox cb)
+        {
+            cb.SelectedItem = DateTime.Today.Year;
+        }
+
         //generate label names over buttons
-        private void GenDayNames()
+        private void GenerateDayNames()
         {
             mWindow.DayLabel1.Content = "Mon";
             mWindow.DayLabel2.Content = "Tue";
