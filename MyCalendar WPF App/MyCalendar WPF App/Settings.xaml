@@ -1,0 +1,30 @@
+﻿<Window x:Class="MyCalendar_WPF_App.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCalendar_WPF_App"
+        mc:Ignorable="d"
+        Title="Settings" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="LoginLabel" Content="Label" HorizontalAlignment="Left" Margin="54,35,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="155,35,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="PasswordLabel" Content="Label" HorizontalAlignment="Left" Margin="54,95,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="155,94,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.492,0.522"/>
+        <Button x:Name="SetDefaultMailBtn" Content="Button" HorizontalAlignment="Left" Margin="385,59,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="MailTitle" Content="Label" HorizontalAlignment="Left" Margin="239,11,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="EventTitle" Content="Label" HorizontalAlignment="Left" Margin="239,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.461"/>
+        <Label x:Name="InstructionLabel" Content="Label" HorizontalAlignment="Left" Margin="90,205,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="InstructionLink" Content="Label" HorizontalAlignment="Left" Margin="215,0,0,0" VerticalAlignment="Center"/>
+        <Label x:Name="ProjectIdLabel" Content="Label" HorizontalAlignment="Left" Margin="108,254,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ClientIdLabel" Content="Label" HorizontalAlignment="Left" Margin="126,300,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ClientSecretLabel" Content="Label" HorizontalAlignment="Left" Margin="126,329,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="EventMailLabel" Content="Label" HorizontalAlignment="Left" Margin="126,374,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ProjectIdTextBox" HorizontalAlignment="Left" Margin="215,253,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ClientIdTextBox" HorizontalAlignment="Left" Margin="197,299,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ClientSecretTextBox" HorizontalAlignment="Left" Margin="215,329,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="EventMailTextBox" HorizontalAlignment="Left" Margin="215,374,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="SetDefaultEventBtn" Content="Button" HorizontalAlignment="Left" Margin="411,278,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

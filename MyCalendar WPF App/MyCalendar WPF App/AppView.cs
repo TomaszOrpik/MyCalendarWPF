@@ -177,6 +177,33 @@ namespace MyCalendar_WPF_App
             _control.SaveEvent(mevent);
         }
 
+        public void CreateSettingsWindow()
+        {
+            Settings set = new Settings();
+
+            set.MailTitle.Content = "Set Default Mail";
+            set.LoginLabel.Content = "Login";
+            set.PasswordLabel.Content = "Password";
+            set.EventTitle.Content = "Set Data for Event";
+            set.ProjectIdLabel.Content = "Project ID";
+            set.ClientIdLabel.Content = "Client ID";
+            set.ClientSecretLabel.Content = "Client Secret";
+            set.EventMailLabel.Content = "Google Account (e-mail)";
+
+            set.SetDefaultMailBtn.Click += (sender, e) => SetDefaultMail_Click(set.LoginTextBox.Text, set.PasswordTextBox.Text);
+            set.SetDefaultEventBtn.Click += (sender, e) => SetDefaultEvent_Click(set.ProjectIdTextBox.Text, set.ClientIdTextBox.Text, set.ClientSecretTextBox.Text, set.EventMailTextBox.Text);
+        }
+
+        private void SetDefaultMail_Click(string login, string password)
+        {
+            _control.SaveDefaultMail(login, password);
+        }
+
+        private void SetDefaultEvent_Click(string projectID, string clientID, string secret, string account)
+        {
+            _control.SaveDefaultEvent(projectID, clientID, secret, account);
+        }
+
         //show note window
         public void ShowNoteDisplay(Note note)
         {

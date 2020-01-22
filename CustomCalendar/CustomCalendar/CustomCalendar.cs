@@ -420,29 +420,7 @@ namespace CustomCalendar
         public void SendEvent()
         {
             //send event from object   
-            if (File.Exists(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\myID.setting") == false)
-            {
-                ///OPEN WINDOW WITH CALENDAR CONFIGURATION AND SET STRING myID
-
-                ///OPEN CONFIGURE SCREEN
-
-                return;
-
-            }
-            else
-            {
-                TextReader setid = new StreamReader(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\myID.setting");
-                string curID = setid.ReadLine();
-                string curSecret = setid.ReadLine();
-                string curProID = setid.ReadLine();
-                string curMail = setid.ReadLine();
-                setid.Close();
-
-
-                TextWriter credentials = new StreamWriter("credentials.json");
-                /// change project id and maybe client secret
-                credentials.WriteLine("{\"installed\":{\"client_id\":\"" + curID + "\",\"project_id\":\"" + curProID + "\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"" + curSecret + "\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\",\"http://localhost\"]}}");
-                credentials.Close();
+                string mail = SettingsSave.GetSetting("account");
 
                 string[] Scopes = { CalendarService.Scope.Calendar };
                 string ApplicationName = "MyCalendar Google Calendar API";
@@ -506,7 +484,7 @@ namespace CustomCalendar
                     Attendees = new EventAttendee[] {
         new EventAttendee() {
             Organizer = true,
-            Email = curMail,
+            Email = mail,
         ResponseStatus = "accepted" }, /// automaticly confirmed
                 },
 
@@ -525,7 +503,15 @@ namespace CustomCalendar
                 String calendarId = "primary";
                 EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
                 Event createdEvent = request.Execute();
-            }
+            
+
+        }
+        
+        public static void CreateJSon(string curID, string curProID, string curSecret)
+        {
+            TextWriter credentials = new StreamWriter("credentials.json");
+            credentials.WriteLine("{\"installed\":{\"client_id\":\"" + curID + "\",\"project_id\":\"" + curProID + "\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"" + curSecret + "\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\",\"http://localhost\"]}}");
+            credentials.Close();
         }
         //delete event from database
         public new void Delete()
@@ -551,49 +537,21 @@ namespace CustomCalendar
         }
 
     }
-    
-    //define user settings
-    public class AppSettings
+
+    public class SettingsSave
     {
-        private static string _skey = "poiuytrewq128954";
-        //set google account requirements in config file
-        public static void CreareMyID(string clientID, string secret, string projectID, string mail)
+        //method to save settings to App.Config file
+        public static string GetSetting(string key)
         {
-            using (var id = new StreamWriter(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\myID.setting", false))
-            {
-                id.WriteLine(clientID);
-                id.WriteLine(secret);
-                id.WriteLine(projectID);
-                id.WriteLine(mail);
-                id.Close();
-            }
+            return ConfigurationManager.AppSettings[key];
         }
-        //set default email in file
-        public static void CreateDefaultMail(string mail, string password)
-        {
-            using (var sw = new StreamWriter(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\personal.setting", false))
-            {
-                sw.WriteLine(mail);
-                sw.WriteLine(Encryptor.Encrypt(_skey, password));
-            }
-        }
-        //get default email
-        public static List<string> GetDefaultMail()
-        {
-            List<string> data = new List<string>();
 
-            TextReader readData = new StreamReader(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\personal.setting");
-            data.Add(readData.ReadLine());
-            data.Add(Encryptor.Decrypt(_skey, readData.ReadLine()));
-            readData.Close();
-            return data;
-
-
-        }
-        //method for setting colors from setting file
-        public static void saveColors()
+        public static void SetSetting(string key, string value)
         {
-            //TO DO
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.Save(ConfigurationSaveMode.Full, true);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 
