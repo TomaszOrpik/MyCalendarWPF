@@ -31,6 +31,8 @@ namespace MyCalendar_WPF_App
             _control = new AppControl();
         }
 
+        
+
         public void LoadCalendar(string choosenYear, string choosenMonth)
         {
             int year;
@@ -244,7 +246,7 @@ namespace MyCalendar_WPF_App
             return new List<Button>(buttonsarr);
         }
         //get current month
-        private Dictionary<string, int> GetMonths()
+        public Dictionary<string, int> GetMonths()
         {
             Dictionary<string, int> months = new Dictionary<string, int>();
 
@@ -372,6 +374,11 @@ namespace MyCalendar_WPF_App
                 cbi.Content = months.FirstOrDefault(x => x.Value == i).Key;
                 cb.Items.Add(cbi);
             }
+        }
+
+        internal static string SetCurrentMonth(Dictionary<string, int> months)
+        {
+            return months.FirstOrDefault(x => x.Value == 1).Key;
         }
         //generate label names over buttons
         private void GenDayNames()

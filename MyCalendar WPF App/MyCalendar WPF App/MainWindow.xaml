@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCalendar_WPF_App"
         mc:Ignorable="d"
-        Title="MyCalendar" Height="700" Width="980">
+        Title="MyCalendar" Height="700" Width="980"
+        MinWidth="840">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -41,10 +42,10 @@
         </Button>
         <Button x:Name="SettingsButton" Content="Button" Grid.Column="0" Grid.Row="5" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="SettingsButton_Click">
         </Button>
-        <Button x:Name="PrevButton" Content="Button" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Click="PrevButton_Click"/>
-        <Button x:Name="NextButton" Content="Button" Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center"  Click="NextButton_Click"/>
-        <ComboBox x:Name="MonthCombobox" Grid.Column="4" Grid.Row="0"  VerticalAlignment="Center"   SelectedIndex="0"/>
-        <TextBox x:Name="YearTextbox" Grid.Column="5" Grid.Row="0" Width="101" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="TextBox" />
+        <Button x:Name="PrevButton" Content="Button" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="PrevButton_Click"/>
+        <Button x:Name="NextButton" Content="Button" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Click="NextButton_Click"/>
+        <ComboBox x:Name="MonthCombobox" Grid.Column="4" Grid.Row="0"  Grid.ColumnSpan="2" VerticalAlignment="Center"  SelectedIndex="0" MaxWidth="100"/>
+        <TextBox x:Name="YearTextbox" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" Width="101" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="TextBox" />
         
         <Button x:Name="ButtonCalendar1" Content="Button" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
         <Button x:Name="ButtonCalendar2" Content="Button" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" Height="auto" />
