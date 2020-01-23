@@ -21,17 +21,34 @@ namespace MyCalendar_WPF_App
     /// </summary>
     public partial class mainWindow : Window
     {
-        AppView _view;
+        AppView _view = new AppView();
         
         public mainWindow()
         {
             InitializeComponent();
             MonthCombobox.SelectedIndex = AppView.GetCurMonthIndex();
-            YearTextbox.Text = AppView.GetCurrentYear();
+            YearCombobox.Text = AppView.GetCurrentYear();
             _view = new AppView();
             //MessageBox.Show(MonthCombobox.SelectionBoxItem.ToString()); YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString()
             _view.Start();
-            _view.LoadCalendar(YearTextbox.Text, MonthCombobox.SelectionBoxItem.ToString());
+            _view.LoadCalendar(YearCombobox.Text, MonthCombobox.SelectionBoxItem.ToString());
+            AppView.SetCurrentMonth(_view.GetMonths(), MonthCombobox);
+
+
+
+            MonthCombobox.SelectionChanged += (o, e) => RefreshCalendar();
+            YearCombobox.SelectionChanged += (o, e) => RefreshCalendar();
+        }
+
+        private void RefreshCalendar()
+        {
+            if (MonthCombobox.SelectedItem == null) return;
+            if (YearCombobox.SelectedItem == null) return;
+
+            string month = MonthCombobox.SelectionBoxItem.ToString();
+            string year = YearCombobox.SelectionBoxItem.ToString();
+
+            _view.LoadCalendar(year, month);
         }
 
         private void AddNoteButton_Click(object sender, RoutedEventArgs e)
