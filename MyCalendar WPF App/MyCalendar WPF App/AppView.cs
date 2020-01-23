@@ -51,16 +51,7 @@ namespace MyCalendar_WPF_App
             RedDays();
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
             ButtonsViewMethod();
-
-
-<<<<<<< HEAD
-=======
-            //function for adding to config file mail and password / event token
-
->>>>>>> a69af6aa7ed569b1ae5520340469f8106972898a
-            //main window - slider to change language (english <> polish)
-
-            //display messagebox
+            _control.SendMailManager();
         }
 
         //create note window
@@ -445,7 +436,7 @@ namespace MyCalendar_WPF_App
         private void ButtonsViewMethod()
         {
             foreach (Button button in _buttons)
-                button.Click += (sender, e) => calendarButton_Click(mWindow.YearTextbox.Text+mWindow.MonthCombobox.Text+button.Content.ToString());
+                button.Click += (sender, e) => calendarButton_Click(mWindow.YearCombobox.Text+mWindow.MonthCombobox.Text+button.Content.ToString());
         }
 
         private void calendarButton_Click(string nameStart)

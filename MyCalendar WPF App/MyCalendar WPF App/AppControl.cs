@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +21,11 @@ namespace MyCalendar_WPF_App
         public void SaveMail(CustomMail mail)
         {
             if (mail.GetReminder())
-                mail.SendMail();
+            {
+                MessageWindow mw = new MessageWindow();
+                mw.TextLabel.Content = mail.SendMail();
+                mw.Show();
+            }
             mail.Save();
         }
 
@@ -103,8 +109,27 @@ namespace MyCalendar_WPF_App
                 }
             }
         }
+        //async method for execute send mail method
+        public async void SendMailManager()
+        {
+            Task<string> task = new Task<string>(SendEmail);           
+            task.Start();
+            MessageWindow mw = new MessageWindow();
+            mw.TextLabel.Content = await task;
+            mw.Show();
+        }
+        //method to send mail every 1 hour
+        private string SendEmail()
+        {
+            List<string> mails = CustomMail.GetSearch(DateTime.Today.Year.ToString()+DateTime.Today.Month.ToString("D2")+DateTime.Today.Day.ToString());
+            foreach (string mail in mails)
+            {
+                CustomMail.StaticSendMail(mail);
+                Thread.Sleep(3600000); 
+            }
 
-        //metoda sprawdzająca czy istnieje today w bazie i wysyłająca maila //statyczna musi być bo coś musi być!!!
+            return $"Planned mails sended up to:{DateTime.Today.Year.ToString()}-{DateTime.Today.Month.ToString("D2")}-{DateTime.Today.Day.ToString()} {DateTime.Today.Hour.ToString()}:{DateTime.Today.Minute.ToString()}"
+        }
 
     }
 }

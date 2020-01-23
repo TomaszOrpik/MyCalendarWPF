@@ -279,7 +279,7 @@ namespace CustomCalendar
             con.Close();
         }
 
-        public void SendMail()
+        public string SendMail()
         {
             //send mail from object   
                 try
@@ -295,17 +295,26 @@ namespace CustomCalendar
                         mailer.Send(message);
                     }
 
-                //uptade sended to true
+                //update sended to true
+                using var con = new SQLiteConnection(_database);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+
+                cmd.CommandText = $"UPDATE Mails SET Sended = '1' WHERE Name = '{_name}'";
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                return $"Sended message to {_recipent}";
             }
-            catch (Exception ex)
+            catch (Exception)
                 {
-                    //not send window to display
+                return "Mail couldn't be send";
                 }
            
         }
 
         //send mail directly from database
-        public static void StaticSendMail(string name)
+        public static string StaticSendMail(string name)
         {
             using var con = new SQLiteConnection(_sdatabase);
             con.Open();
@@ -315,33 +324,44 @@ namespace CustomCalendar
             using var cmd = new SQLiteCommand(stm, con);
             using SQLiteDataReader rdr = cmd.ExecuteReader();
 
+            string subject = "";
+            string body = "";
+            string mail = "";
+            string password = "";
+            string recipent = "";
+
             try
             {
                 if (rdr.Read())
                 {
-
-                    var message = new MailMessage(rdr.GetString(6), rdr.GetString(8));
-                    message.Subject = rdr.GetString(3);
-                    message.Body = rdr.GetString(4);
-
-                    using (SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587))
-                    {
-                        mailer.Credentials = new NetworkCredential(rdr.GetString(6), Encryptor.Decrypt(_skey, rdr.GetString(7)));
-                        mailer.EnableSsl = true;
-                        mailer.Send(message);
-                    }
-
+                    subject = rdr.GetString(3);
+                    body = rdr.GetString(4);
+                    mail = rdr.GetString(6);
+                    password = Encryptor.Decrypt(_skey, rdr.GetString(7));
+                    recipent = rdr.GetString(8);
                 }
 
-                //uptade sended to true
-            }
-            catch (Exception ex)
-            {
-                //not send window to display
-            }
-            finally
-            {
+                var message = new MailMessage(mail,recipent);
+                message.Subject = subject;
+                message.Body = body;
+
+                using (SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    mailer.Credentials = new NetworkCredential(mail, password);
+                    mailer.EnableSsl = true;
+                    mailer.Send(message);
+                }
+
+                //update sended to true
+                cmd.CommandText = $"UPDATE Mails SET Sended = '1' WHERE Name = '{name}'";
+                cmd.ExecuteNonQuery();
                 con.Close();
+
+                return $"Sended message to {recipent}";
+            }
+            catch (Exception)
+            {
+                return "Mail couldn't be send";
             }
         }
 
