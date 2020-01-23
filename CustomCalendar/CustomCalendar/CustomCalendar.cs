@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Configuration;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Net;
@@ -144,6 +146,39 @@ namespace CustomCalendar
             cmd.CommandText = $"DELETE FROM Notes WHERE Name = \"{name}\" LIMIT 1;";
             cmd.ExecuteNonQuery();
         }
+        //get static list of elements with name
+        public static List<string> GetSearch(string value) => SearchDataBase("Notes", value);
+
+        internal static List<string> SearchDataBase(string type, string nameStart)
+        {
+            List<string> tempList = new List<string>();
+
+            string query = $"Select Name FROM {type} WHERE Name LIKE '{nameStart}%';";
+
+            DataTable table = GetDataTable(query);
+
+            foreach (DataRow row in table.Rows)
+                tempList.Add(row.ItemArray[0].ToString());
+
+            return tempList;
+        }
+
+        private static DataTable GetDataTable(string sql)
+        {
+            DataTable dt = new DataTable();
+            using (var c = new SQLiteConnection(_sdatabase))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        dt.Load(rdr);
+                        return dt;
+                    }
+                }
+            }
+        }
 
         internal static string LoadConnectionString(string id="Default")
         {
@@ -260,9 +295,9 @@ namespace CustomCalendar
                         mailer.Send(message);
                     }
 
-                    _sended = true;
-                }
-                catch (Exception ex)
+                //uptade sended to true
+            }
+            catch (Exception ex)
                 {
                     //not send window to display
                 }
@@ -297,6 +332,8 @@ namespace CustomCalendar
                     }
 
                 }
+
+                //uptade sended to true
             }
             catch (Exception ex)
             {
@@ -307,6 +344,9 @@ namespace CustomCalendar
                 con.Close();
             }
         }
+
+        //get static list of elements with name
+        public static new List<string> GetSearch(string value) => SearchDataBase("Mails", value);
 
         //delete mail from database
         public new void Delete()
@@ -524,6 +564,9 @@ namespace CustomCalendar
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        //get static list of elements with name
+        public static new List<string> GetSearch(string value) => SearchDataBase("Events", value);
 
         public new static void StaticDelete(string name)
         {

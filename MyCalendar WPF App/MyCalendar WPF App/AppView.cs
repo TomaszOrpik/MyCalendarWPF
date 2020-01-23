@@ -45,13 +45,9 @@ namespace MyCalendar_WPF_App
             NextMonthDays(year, currentMonthNum, _currentDayCount.Item2);
             RedDays();
             SetToday(currentMonthNum, year, _currentDayCount.Item2);
-            //color days if data exist in database async // get date from control
-            //day click function to open all notes for current day by loop to all days with generate calendar method
-            //async method for checking mails to send and send them
-            //async method for checking note reminders and display messBox you have reminder
+            ButtonsViewMethod();
 
-            //function for adding to config file mail and password / event token
-            
+
             //main window - slider to change language (english <> polish)
 
             //display messagebox
@@ -61,6 +57,8 @@ namespace MyCalendar_WPF_App
         public void CreateNoteDisplay(string type)
         {
             AddWindow win = new AddWindow();
+            Random random = new Random();
+
             win.TitleLabel.Content = "Title";
             if(type == "mail")
             {
@@ -129,13 +127,13 @@ namespace MyCalendar_WPF_App
             win.StartDayMonthBox.SelectionChanged += (sender, e) => DayMonthBox_SelectionChanged(win.StartDateDayBox, Convert.ToInt32(win.StartDayYearTextBox.Text), win.StartDayMonthBox.SelectedIndex + 1);
            
             if (type == "note")
-                win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString()+ win.StartDateHourBox.SelectedItem.ToString()+win.StartDateMinBox.SelectedItem.ToString(),
+                win.SaveButton.Click += (sender, e) => SaveNoteButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString()+ win.StartDateHourBox.SelectedItem.ToString()+win.StartDateMinBox.SelectedItem.ToString()+random.Next(0, 1000).ToString(),
                                                                         $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                         win.TitleTextbox.Text,
                                                                         win.DescriptionRichTextBox.Selection.Text,
                                                                         win.ReminderCheckBox.IsChecked.Value);
             if(type == "mail")
-                win.SaveButton.Click += (sender, e) => SaveMailButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
+                win.SaveButton.Click += (sender, e) => SaveMailButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString()+random.Next(0, 1000).ToString(),
                                                                        $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                        win.TitleTextbox.Text,
                                                                        win.DescriptionRichTextBox.Selection.Text,
@@ -144,7 +142,7 @@ namespace MyCalendar_WPF_App
                                                                        win.PasswordTextbox.Text,
                                                                        win.RecipentTextBox.Text);
             if (type == "event")
-                win.SaveButton.Click += (sender, e) => SaveEventButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString(),
+                win.SaveButton.Click += (sender, e) => SaveEventButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString()+random.Next(0, 1000).ToString(),
                                                                        $"{win.StartDateDayBox.SelectedItem.ToString()}-{win.StartDayMonthBox.SelectedItem.ToString()}-{win.StartDayYearTextBox.Text} {win.StartDateHourBox.SelectedItem.ToString()}:{win.StartDateMinBox.SelectedItem.ToString()}",
                                                                        win.TitleTextbox.Text,
                                                                        win.DescriptionRichTextBox.Selection.Text,
@@ -267,7 +265,7 @@ namespace MyCalendar_WPF_App
                                     mWindow.ButtonCalendar22, mWindow.ButtonCalendar23, mWindow.ButtonCalendar24, mWindow.ButtonCalendar25, mWindow.ButtonCalendar26, mWindow.ButtonCalendar27, mWindow.ButtonCalendar28,
                                     mWindow.ButtonCalendar29, mWindow.ButtonCalendar30, mWindow.ButtonCalendar31, mWindow.ButtonCalendar32, mWindow.ButtonCalendar33, mWindow.ButtonCalendar34, mWindow.ButtonCalendar35,
                                     mWindow.ButtonCalendar36, mWindow.ButtonCalendar37, mWindow.ButtonCalendar38, mWindow.ButtonCalendar39, mWindow.ButtonCalendar40, mWindow.ButtonCalendar41, mWindow.ButtonCalendar42};
-
+                      
             return new List<Button>(buttonsarr);
         }
         //get current month
@@ -411,6 +409,19 @@ namespace MyCalendar_WPF_App
             mWindow.DayLabel6.Content = "Sat";
             mWindow.DayLabel7.Content = "Sun";
         }
+        //add function to buttons for display note view
+        private void ButtonsViewMethod()
+        {
+            foreach (Button button in _buttons)
+                button.Click += (sender, e) => calendarButton_Click(mWindow.YearTextbox.Text+mWindow.MonthCombobox.Text+button.Content.ToString());
+        }
+
+        private void calendarButton_Click(string nameStart)
+        {
+            _control.DayEvent(nameStart);
+        }
+
+
         //create hour box items
         private void CreateHours(ComboBox cb)
         {

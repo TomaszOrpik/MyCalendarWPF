@@ -67,8 +67,44 @@ namespace MyCalendar_WPF_App
                     return;
             }
         }
+        //add main window buttons functionality
+        public void DayEvent(string nameStart)
+        {
+            AppView view = new AppView();
 
-        //metoda sprawdzająca czy istnieje today w bazie i wysyłająca maila
+            List<string> notesNames = Note.GetSearch(nameStart);
+            List<string> mailsNames = CustomMail.GetSearch(nameStart);
+            List<string> eventsNames = MyEvent.GetSearch(nameStart);
+
+            if(notesNames.Count != 0)
+            {
+                foreach(string name in notesNames)
+                {
+                    Note note = new Note(name);
+                    view.ShowNoteDisplay(note);
+                }
+            }
+
+            if (mailsNames.Count != 0)
+            {
+                foreach (string name in mailsNames)
+                {
+                    CustomMail mail = new CustomMail(name);
+                    view.ShowMailDisplay(mail);
+                }
+            }
+
+            if (eventsNames.Count != 0)
+            {
+                foreach (string name in eventsNames)
+                {
+                    MyEvent mevent = new MyEvent(name);
+                    view.ShowEventDisplay(mevent);
+                }
+            }
+        }
+
+        //metoda sprawdzająca czy istnieje today w bazie i wysyłająca maila //statyczna musi być bo coś musi być!!!
 
     }
 }
