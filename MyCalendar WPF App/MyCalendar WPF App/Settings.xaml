@@ -11,7 +11,7 @@
         <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="155,35,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="PasswordLabel" Content="Label" HorizontalAlignment="Left" Margin="54,95,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="155,94,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.492,0.522"/>
-        <Button x:Name="SetDefaultMailBtn" Content="Button" HorizontalAlignment="Left" Margin="385,59,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="SetDefaultMailBtn" Content="Button" HorizontalAlignment="Left" Margin="385,59,0,0" VerticalAlignment="Top" Click="SetDefaultMailBtn_Click"/>
         <Label x:Name="MailTitle" Content="Label" HorizontalAlignment="Left" Margin="239,11,0,0" VerticalAlignment="Top"/>
         <Label x:Name="EventTitle" Content="Label" HorizontalAlignment="Left" Margin="239,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.461"/>
         <Label x:Name="InstructionLabel" Content="Label" HorizontalAlignment="Left" Margin="90,205,0,0" VerticalAlignment="Top"/>
@@ -24,7 +24,7 @@
         <TextBox x:Name="ClientIdTextBox" HorizontalAlignment="Left" Margin="197,299,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="ClientSecretTextBox" HorizontalAlignment="Left" Margin="215,329,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="EventMailTextBox" HorizontalAlignment="Left" Margin="215,374,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="SetDefaultEventBtn" Content="Button" HorizontalAlignment="Left" Margin="411,278,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="SetDefaultEventBtn" Content="Button" HorizontalAlignment="Left" Margin="411,278,0,0" VerticalAlignment="Top" Click="SetDefaultEventBtn_Click"/>
 
     </Grid>
 </Window>

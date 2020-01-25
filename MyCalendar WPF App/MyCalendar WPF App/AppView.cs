@@ -111,7 +111,6 @@ namespace MyCalendar_WPF_App
                 GenerateMonths(_months, win.EndDateDayBox);
                 win.EndDateYearTextBox.Text = DateTime.Now.ToString("yyyy");
                 win.EndDateMonthBox.SelectedIndex = DateTime.Now.Month - 1;
-                //CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex + 1);
                 win.EndDateDayBox.SelectedIndex = DateTime.Now.Day - 1;
             }
             else
@@ -257,6 +256,12 @@ namespace MyCalendar_WPF_App
             sw.ReminderLabel.Content = mevent.GetReminder() ? "You set SMS Reminder" : "You didn't set SMS Reminder";
 
             sw.DeleteButton.Click += (sender, e) => DeleteEventButton_Click(mevent.GetValue("name"));
+        }
+
+        public void DisplaySettings()
+        {
+            Settings settings = new Settings();
+            settings.Show();
         }
 
         private void DeleteEventButton_Click(string name) { _control.DeleteEvent(name); }
@@ -477,7 +482,6 @@ namespace MyCalendar_WPF_App
 
         private void CreateDayBox(ComboBox cb,int year, int month)
         {
-            MessageBox.Show(month.ToString());
             int daysCount = DateTime.DaysInMonth(year, month);
             
             for(int i = 1; i <= daysCount; i++)

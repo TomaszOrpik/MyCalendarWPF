@@ -17,9 +17,22 @@ namespace MyCalendar_WPF_App
     /// </summary>
     public partial class Settings : Window
     {
+        AppControl _control;
+
         public Settings()
         {
             InitializeComponent();
+            _control = new AppControl();
+        }
+
+        private void SetDefaultEventBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _control.SaveDefaultEvent(ProjectIdTextBox.Text, ClientIdTextBox.Text, ClientSecretTextBox.Text, EventMailTextBox.Text);
+        }
+
+        private void SetDefaultMailBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _control.SaveDefaultMail(LoginTextBox.Text, PasswordTextBox.Text);
         }
     }
 }

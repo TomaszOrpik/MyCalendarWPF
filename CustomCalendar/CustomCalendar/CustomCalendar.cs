@@ -151,15 +151,18 @@ namespace CustomCalendar
         internal static List<string> SearchDataBase(string type, string nameStart)
         {
             List<string> tempList = new List<string>();
+            
+            if(CheckForTable(type))
+            {
+                string query = $"Select Name FROM {type} WHERE Name LIKE '{nameStart}%';";
 
-            string query = $"Select Name FROM {type} WHERE Name LIKE '{nameStart}%';";
+                DataTable table = GetDataTable(query);
 
-            DataTable table = GetDataTable(query);
+                foreach (DataRow row in table.Rows)
+                    tempList.Add(row.ItemArray[0].ToString());
+            }
+                return tempList;
 
-            foreach (DataRow row in table.Rows)
-                tempList.Add(row.ItemArray[0].ToString());
-
-            return tempList;
         }
 
         private static DataTable GetDataTable(string sql)
