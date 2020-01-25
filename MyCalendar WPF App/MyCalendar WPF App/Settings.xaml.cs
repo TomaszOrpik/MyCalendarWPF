@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,18 @@ namespace MyCalendar_WPF_App
         {
             InitializeComponent();
             _control = new AppControl();
+
+            Link.MouseLeftButtonDown += (o, e) => LinkClicked();
+        }
+
+        private void LinkClicked()
+        {
+            var ps = new ProcessStartInfo("https://developers.google.com/adwords/api/docs/guides/authentication")
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
 
         private void SetDefaultEventBtn_Click(object sender, RoutedEventArgs e)
@@ -32,7 +45,7 @@ namespace MyCalendar_WPF_App
 
         private void SetDefaultMailBtn_Click(object sender, RoutedEventArgs e)
         {
-            _control.SaveDefaultMail(LoginTextBox.Text, PasswordTextBox.Text);
+            _control.SaveDefaultMail(LoginTextBox.Text, PasswordTextBox.Password);
         }
     }
 }

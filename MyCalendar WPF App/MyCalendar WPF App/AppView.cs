@@ -192,7 +192,7 @@ namespace MyCalendar_WPF_App
             set.ClientSecretLabel.Content = "Client Secret";
             set.EventMailLabel.Content = "Google Account (e-mail)";
 
-            set.SetDefaultMailBtn.Click += (sender, e) => SetDefaultMail_Click(set.LoginTextBox.Text, set.PasswordTextBox.Text);
+            set.SetDefaultMailBtn.Click += (sender, e) => SetDefaultMail_Click(set.LoginTextBox.Text, set.PasswordTextBox.Password);
             set.SetDefaultEventBtn.Click += (sender, e) => SetDefaultEvent_Click(set.ProjectIdTextBox.Text, set.ClientIdTextBox.Text, set.ClientSecretTextBox.Text, set.EventMailTextBox.Text);
         }
 
