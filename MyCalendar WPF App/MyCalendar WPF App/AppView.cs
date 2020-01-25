@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using CustomCalendar;
 
 namespace MyCalendar_WPF_App
@@ -109,7 +111,7 @@ namespace MyCalendar_WPF_App
                 GenerateMonths(_months, win.EndDateDayBox);
                 win.EndDateYearTextBox.Text = DateTime.Now.ToString("yyyy");
                 win.EndDateMonthBox.SelectedIndex = DateTime.Now.Month - 1;
-                CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex + 1);
+                //CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex + 1);
                 win.EndDateDayBox.SelectedIndex = DateTime.Now.Day - 1;
             }
             else
@@ -475,6 +477,7 @@ namespace MyCalendar_WPF_App
 
         private void CreateDayBox(ComboBox cb,int year, int month)
         {
+            MessageBox.Show(month.ToString());
             int daysCount = DateTime.DaysInMonth(year, month);
             
             for(int i = 1; i <= daysCount; i++)
@@ -498,9 +501,17 @@ namespace MyCalendar_WPF_App
         //async clock generratiot
         private void GetTime()
         {
-            Task<string> task = new Task<string>(_control.GenerateTime);
+            Thread task = new Thread(GenerateTime);
             task.Start();
-            mWindow.TimeLabel.Content = _control.GenerateTime();
+        }
+        //async for clock generation
+        public void GenerateTime()
+        {
+            while (true)
+            {
+                mainWindow.main.Status = $"{DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}:{DateTime.Now.Second.ToString("D2")}";
+                Thread.Sleep(1000);
+            }
         }
     }
 }

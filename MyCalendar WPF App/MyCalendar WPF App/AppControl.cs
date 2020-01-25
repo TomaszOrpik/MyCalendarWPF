@@ -136,13 +136,5 @@ namespace MyCalendar_WPF_App
             else
                 return "none";
         }
-        //async for clock generation
-        public string GenerateTime()
-        {
-            string time = $"{DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}:{DateTime.Now.Second.ToString("D2")}";
-            Thread.Sleep(1000);
-            return time;
-        }
-
     }
 }

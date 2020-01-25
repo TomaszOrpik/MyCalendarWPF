@@ -22,9 +22,16 @@ namespace MyCalendar_WPF_App
     public partial class mainWindow : Window
     {
         AppView _view = new AppView();
+        internal static mainWindow main;
+        internal string Status
+        {
+            get { return TimeLabel.Content.ToString(); }
+            set { Dispatcher.Invoke(new Action(() => { TimeLabel.Content = value; })); }
+        }
         
         public mainWindow()
         {
+            main = this;
             InitializeComponent();
             MonthCombobox.SelectedIndex = AppView.GetCurMonthIndex();
             YearCombobox.Text = AppView.GetCurrentYear();
