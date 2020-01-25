@@ -68,17 +68,21 @@ namespace MyCalendar_WPF_App
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MonthCombobox.SelectedIndex == 12) return;
+            MonthCombobox.SelectedIndex = MonthCombobox.SelectedIndex + 1;
+            RefreshCalendar();
         }
 
         private void PrevButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MonthCombobox.SelectedIndex == 0) return;            
+            MonthCombobox.SelectedIndex = MonthCombobox.SelectedIndex - 1;
+            RefreshCalendar();
         }
     }
 

@@ -31,19 +31,18 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.25*"></RowDefinition>
-            
-        </Grid.RowDefinitions>
 
-        <Button x:Name="AddNoteButton" Content="Button" Grid.Column="0" Grid.Row="2" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"  Click="AddNoteButton_Click">
+        </Grid.RowDefinitions>
+        <Button x:Name="AddNoteButton" Content="Add Note" Grid.Column="0" Grid.Row="2" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"  Click="AddNoteButton_Click">
         </Button>
-        <Button x:Name="AddMailButton" Content="Button" Grid.Column="0" Grid.Row="3" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddMailButton_Click">
+        <Button x:Name="AddMailButton" Content="Add Email" Grid.Column="0" Grid.Row="3" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddMailButton_Click">
         </Button>
-        <Button x:Name="AddEventButton" Content="Button" Grid.Column="0" Grid.Row="4" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddEventButton_Click">
+        <Button x:Name="AddEventButton" Content="Add Event" Grid.Column="0" Grid.Row="4" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="AddEventButton_Click">
         </Button>
-        <Button x:Name="SettingsButton" Content="Button" Grid.Column="0" Grid.Row="5" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="SettingsButton_Click">
+        <Button x:Name="SettingsButton" Content="Settings" Grid.Column="0" Grid.Row="5" Height="55" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="SettingsButton_Click">
         </Button>
-        <Button x:Name="PrevButton" Content="Button" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="PrevButton_Click"/>
-        <Button x:Name="NextButton" Content="Button" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Click="NextButton_Click"/>
+        <Button x:Name="PrevButton" Content="Previous" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="PrevButton_Click"/>
+        <Button x:Name="NextButton" Content="Next" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Click="NextButton_Click"/>
         <ComboBox x:Name="MonthCombobox" Grid.Column="4" Grid.Row="0"  Grid.ColumnSpan="2" VerticalAlignment="Center"  SelectedIndex="0" MaxWidth="100"/>
         <ComboBox x:Name="YearCombobox" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" Width="101" VerticalAlignment="Center"  HorizontalAlignment="Center" SelectedIndex="0" />
         
@@ -99,4 +98,5 @@
         <Label x:Name="DayLabel7" Content="Label" Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center" />
 
     </Grid>
+    
 </Window>
