@@ -5922,25 +5922,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tomek\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\maciek\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
+      "projectUniqueName": "D:\\projekty\\MyCalendar\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
       "projectName": "CustomCalendar",
-      "projectPath": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
-      "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tomek\\Desktop\\GitHub\\MyCalendar\\CustomCalendar\\CustomCalendar\\obj\\",
+      "projectPath": "D:\\projekty\\MyCalendar\\MyCalendar\\CustomCalendar\\CustomCalendar\\CustomCalendar.csproj",
+      "packagesPath": "C:\\Users\\maciek\\.nuget\\packages\\",
+      "outputPath": "D:\\projekty\\MyCalendar\\MyCalendar\\CustomCalendar\\CustomCalendar\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\maciek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5995,7 +5990,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
