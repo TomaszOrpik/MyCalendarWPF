@@ -75,7 +75,7 @@ namespace MyCalendar_WPF_App
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            _view.DisplaySettings();            
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
