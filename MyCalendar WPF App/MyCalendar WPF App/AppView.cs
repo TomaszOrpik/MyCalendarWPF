@@ -329,6 +329,7 @@ namespace MyCalendar_WPF_App
             {
                 _buttons[f].Content = Convert.ToString(i);
                 _buttons[f].Background = Brushes.LightGray;
+                _buttons[f].Foreground = Brushes.Black;
                 f++;
             }
         }
@@ -367,6 +368,7 @@ namespace MyCalendar_WPF_App
             for(int i = (days + d); i < 42; i++)
             {
                 _buttons[i].Content = Convert.ToString(prevDays);
+                _buttons[i].Background = Brushes.LightGray;
                 _buttons[i].Foreground = Brushes.Black;
                 prevDays++;
             }
