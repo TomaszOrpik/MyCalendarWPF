@@ -144,7 +144,7 @@ namespace MyCalendar_WPF_App
                                                                        win.DescriptionRichTextBox.Selection.Text,
                                                                        win.ReminderCheckBox.IsChecked.Value,
                                                                        win.LocationTextbox.Text,
-                                                                       win.PasswordTextbox.Text,
+                                                                       win.PasswordTextbox.Password,
                                                                        win.RecipentTextBox.Text);
             if (type == "event")
                 win.SaveButton.Click += (sender, e) => SaveEventButton_Click(win.StartDayYearTextBox + win.StartDayMonthBox.SelectedItem.ToString() + win.StartDateDayBox.SelectedItem.ToString() + win.StartDateHourBox.SelectedItem.ToString() + win.StartDateMinBox.SelectedItem.ToString()+random.Next(0, 1000).ToString(),
