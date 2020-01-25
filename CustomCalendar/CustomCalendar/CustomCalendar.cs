@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
@@ -68,11 +67,11 @@ namespace CustomCalendar
             con.Close();
         }
         //check if table exists
-        internal bool CheckForTable(string tableName)
+        public static bool CheckForTable(string tableName)
         {
             try
             {
-                using var con = new SQLiteConnection(_database);
+                using var con = new SQLiteConnection(_sdatabase);
                 con.Open();
                 using var cmd = new SQLiteCommand(con);
 
@@ -314,7 +313,7 @@ namespace CustomCalendar
         }
 
         //send mail directly from database
-        public static string StaticSendMail(string name)
+        public static string StaticSendMail(string name) //check if table mail exist
         {
             using var con = new SQLiteConnection(_sdatabase);
             con.Open();

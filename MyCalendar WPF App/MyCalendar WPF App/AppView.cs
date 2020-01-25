@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -32,6 +33,7 @@ namespace MyCalendar_WPF_App
             SetCurrentYear(mWindow.YearCombobox);
             GenerateDayNames();
             _control = new AppControl();
+            GetTime();
         }
 
         
@@ -42,7 +44,7 @@ namespace MyCalendar_WPF_App
             int currentMonthNum;
 
             Int32.TryParse(choosenYear, out year);
-            currentMonthNum = _months[choosenMonth];
+            currentMonthNum = mWindow.MonthCombobox.SelectedIndex + 1;
             _currentDayCount = CurrentDayCounter(year, currentMonthNum);
             _b = _currentDayCount.Item1;
             PrevMonthDays(currentMonthNum, year, _currentDayCount.Item2);
@@ -326,6 +328,7 @@ namespace MyCalendar_WPF_App
             for(int i = startLastMonthDay; i<=LastDay; i++)
             {
                 _buttons[f].Content = Convert.ToString(i);
+                _buttons[f].Background = Brushes.LightGray;
                 f++;
             }
         }
@@ -490,6 +493,12 @@ namespace MyCalendar_WPF_App
         //get current year
         public static string GetCurrentYear() => DateTime.Now.ToString("yyyy");
 
-
+        //async clock generratiot
+        private void GetTime()
+        {
+            Task<string> task = new Task<string>(_control.GenerateTime);
+            task.Start();
+            mWindow.TimeLabel.Content = _control.GenerateTime();
+        }
     }
 }

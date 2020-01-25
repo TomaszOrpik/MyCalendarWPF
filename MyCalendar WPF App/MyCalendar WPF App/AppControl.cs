@@ -115,20 +115,33 @@ namespace MyCalendar_WPF_App
             Task<string> task = new Task<string>(SendEmail);           
             task.Start();
             MessageWindow mw = new MessageWindow();
-            mw.TextLabel.Content = await task;
-            mw.Show();
+            string i = await task;
+            mw.TextLabel.Content =i;
+            if(i != "none")
+                mw.Show();
         }
         //method to send mail every 1 hour
         private string SendEmail()
         {
-            List<string> mails = CustomMail.GetSearch(DateTime.Today.Year.ToString()+DateTime.Today.Month.ToString("D2")+DateTime.Today.Day.ToString());
-            foreach (string mail in mails)
+            if (Note.CheckForTable("Mails"))
             {
-                CustomMail.StaticSendMail(mail);
-                Thread.Sleep(3600000); 
+                List<string> mails = CustomMail.GetSearch(DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString("D2") + DateTime.Today.Day.ToString());
+                foreach (string mail in mails)
+                {
+                    CustomMail.StaticSendMail(mail);
+                }
+                Thread.Sleep(3600000);
+                return $"Planned mails sended up to:{DateTime.Today.Year.ToString()}-{DateTime.Today.Month.ToString("D2")}-{DateTime.Today.Day.ToString()} {DateTime.Today.Hour.ToString()}:{DateTime.Today.Minute.ToString()}";
             }
-
-            return $"Planned mails sended up to:{DateTime.Today.Year.ToString()}-{DateTime.Today.Month.ToString("D2")}-{DateTime.Today.Day.ToString()} {DateTime.Today.Hour.ToString()}:{DateTime.Today.Minute.ToString()}"
+            else
+                return "none";
+        }
+        //async for clock generation
+        public string GenerateTime()
+        {
+            string time = $"{DateTime.Now.Hour.ToString("D2")}:{DateTime.Now.Minute.ToString("D2")}:{DateTime.Now.Second.ToString("D2")}";
+            Thread.Sleep(1000);
+            return time;
         }
 
     }
