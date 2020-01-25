@@ -1,0 +1,14 @@
+﻿<Window x:Class="MyCalendar_WPF_App.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCalendar_WPF_App"
+        mc:Ignorable="d"
+        Title="MessageWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="TextLabel" Content="Label" HorizontalAlignment="Left" Margin="170,121,0,0" VerticalAlignment="Top" Height="57" Width="352" FontSize="22"/>
+        <Button x:Name="ConfirmButton" Content="Button" HorizontalAlignment="Left" Margin="237,249,0,0" VerticalAlignment="Top" Height="84" Width="218" FontSize="22"/>
+
+    </Grid>
+</Window>
