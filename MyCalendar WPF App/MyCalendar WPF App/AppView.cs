@@ -108,9 +108,10 @@ namespace MyCalendar_WPF_App
                 win.EndDateLabel.Content = "End Date";
                 CreateHours(win.EndDateHourBox);
                 CreateMinutes(win.EndDateMinBox);
-                GenerateMonths(_months, win.EndDateDayBox);
+                GenerateMonths(_months, win.EndDateMonthBox);
                 win.EndDateYearTextBox.Text = DateTime.Now.ToString("yyyy");
                 win.EndDateMonthBox.SelectedIndex = DateTime.Now.Month - 1;
+                CreateDayBox(win.EndDateDayBox, Convert.ToInt32(win.EndDateYearTextBox.Text), win.EndDateMonthBox.SelectedIndex+1);
                 win.EndDateDayBox.SelectedIndex = DateTime.Now.Day - 1;
             }
             else
