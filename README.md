@@ -45,7 +45,7 @@ Starting point of development was to make Windows Calendar. After reading about 
 
 ### Report Bug and improves
 
-You can report encountered bugs or send ideas for improvement [here](hhttps://github.com/maciejbandyk/MyCalendar/issues/new)
+You can report encountered bugs or send ideas for improvement [here](hhttps://github.com/tomaszorpik/MyCalendar/issues/new)
 
 
 ### License
