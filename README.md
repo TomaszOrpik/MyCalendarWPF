@@ -4,6 +4,7 @@
 # Introduction
 
 MyCalendar is created in C# + Visual Studio application, created for better time management. Main focus of app is to centralize users mails, meetings and notes for fast access. The calendar renders all terms in the main window, on chosen day and makes it easy to access by just click on chosen day. Thanks to custom controls, for adding new terms user doesn't need to open a new window. Application is fully customizable, works in the background and user can set default e-mail, making working with calendar even faster.
+![Image of MyCalendar app](https://i.gyazo.com/86a6d7bd33a497b9f6427c129b735373.png)
 
 # Technologies
 
@@ -55,6 +56,3 @@ Application was uploaded under GENERAL PUBLIC LICENSE for more information [chec
 ### Contact
 
 Feel free to [Contact me!](https://github.com/TomaszOrpik) or [Maciek!](https://github.com/maciejbandyk)
-
-### Preview
-![Image of MyCalendar app](https://i.gyazo.com/86a6d7bd33a497b9f6427c129b735373.png)
