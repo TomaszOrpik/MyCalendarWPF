@@ -15,6 +15,7 @@ App is programmed in C# language, based on .Net Core in version 3.1, for correct
 * Linq for operating on strings and file names
 * RegularExpressions for avoid bad format bugs
 * Threadening for async mail and timer access
+* SQLite for collecting data locally on users computer
 * Net.Mail for connecting to mail server and automate the message sending
 * Google.Apis.Calendar for synchronizing app with Google Calendar events
 * Google.Apis.Auth.OAuth2 for user authentication
